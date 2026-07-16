@@ -1,3 +1,6 @@
+@use "../utils/mixins" as *;
+@use "../base/fonts" as *;
+
 .backdrop {
   --_open: 1000ms;
   --_close: 1000ms;
@@ -24,4 +27,102 @@
 
 body:has(.backdrop[open]) {
   overflow: hidden;
+}
+
+@include mobile {
+  .header {
+    &__toggle {
+      display: flex;
+      width: convert-to-rem(44px);
+      height: convert-to-rem(44px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: convert-to-rem(5px);
+      border: 1px solid var(--color-white);
+      border-radius: 50%;
+
+      span {
+        display: block;
+        width: convert-to-rem(18px);
+        height: 1px;
+        background-color: var(--color-white);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary-dark);
+        outline-offset: convert-to-rem(3px);
+      }
+    }
+
+    &__panel {
+      position: fixed;
+      top: convert-to-rem(72px);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: convert-to-rem(32px);
+      padding: convert-to-rem(32px) var(--_section-offset);
+      background-color: var(--color-secondary-light);
+      opacity: 0;
+      pointer-events: none;
+      text-align: center;
+      transform: translateY(convert-to-rem(-12px));
+      transition: opacity 0.25s ease, transform 0.25s ease;
+
+      .header__navigation a,
+      .header__languages a {
+        color: var(--color-neutral-950);
+      }
+
+      .header__languages {
+        border-color: var(--color-secondary-muted);
+      }
+    }
+
+    &__navigation {
+      .nav-list {
+        display: grid;
+        justify-items: center;
+        gap: convert-to-rem(8px);
+      }
+
+      a {
+        padding-block: convert-to-rem(12px);
+        @include typography($font-secondary, $fw-semibold, 30px, 1.1);
+      }
+    }
+
+    &__languages {
+      width: max-content;
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    &[data-open="true"] {
+      .header__panel {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .header__toggle {
+        span:nth-child(1) {
+          transform: translateY(convert-to-rem(6px)) rotate(45deg);
+        }
+
+        span:nth-child(2) {
+          opacity: 0;
+        }
+
+        span:nth-child(3) {
+          transform: translateY(convert-to-rem(-6px)) rotate(-45deg);
+        }
+      }
+    }
+  }
 }

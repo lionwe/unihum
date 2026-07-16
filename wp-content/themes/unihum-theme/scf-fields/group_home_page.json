@@ -1,43 +1,16 @@
 {
-    "key":  "group_home_page",
-    "title":  "Головна сторінка",
-    "fields":  [
-                   {
-                       "key":  "field_home_tab_hero",
-                       "label":  "Hero",
-                       "name":  "",
-                       "type":  "tab",
-                       "instructions":  "",
-                       "required":  0,
-                       "conditional_logic":  0,
-                       "wrapper":  {
-                                       "width":  "",
-                                       "class":  "",
-                                       "id":  ""
-                                   },
-                       "placement":  "top",
-                       "endpoint":  0,
-                       "selected":  1
-                   }
-               ],
-    "location":  [
-                     [
-                         {
-                             "param":  "page_template",
-                             "operator":  "==",
-                             "value":  "pages/home.php"
-                         }
-                     ]
-                 ],
-    "menu_order":  0,
-    "position":  "normal",
-    "style":  "default",
-    "label_placement":  "top",
-    "instruction_placement":  "label",
-    "hide_on_screen":  "",
-    "active":  true,
-    "description":  "Секції головної сторінки.",
-    "show_in_rest":  0,
-    "display_title":  "",
-    "modified":  1782132867
+  "key": "group_home_page",
+  "title": "Головна сторінка",
+  "fields": [
+    {"key":"field_home_tab_hero","label":"Hero","name":"","type":"tab","placement":"top","endpoint":0,"selected":1},
+    {"key":"field_home_hero_background","label":"Фонове зображення — ПК","name":"home_hero_background","type":"image","instructions":"Широке зображення для першого екрана. Рекомендований розмір: 2048×1152 px.","required":0,"return_format":"id","preview_size":"medium","library":"all"},
+    {"key":"field_home_hero_background_mobile","label":"Фонове зображення — мобільний","name":"home_hero_background_mobile","type":"image","instructions":"Вертикальне зображення для екранів до 767 px. Якщо не заповнити, буде використано зображення для ПК.","required":0,"return_format":"id","preview_size":"medium","library":"all"},
+    {"key":"field_home_hero_content","label":"Заголовок та опис","name":"home_hero_content","type":"wysiwyg","instructions":"Додайте заголовок формату H1 і абзац з описом. Для переносу після тире у заголовку використовуйте Shift+Enter.","required":1,"tabs":"all","toolbar":"full","media_upload":0,"delay":0},
+    {"key":"field_home_hero_button","label":"Основна кнопка","name":"home_hero_button","type":"link","instructions":"Основна дія першого екрана.","required":0,"return_format":"array"},
+    {"key":"field_home_hero_quote","label":"Цитата","name":"home_hero_quote","type":"textarea","instructions":"Текст картки праворуч. До 110 символів, щоб цитата поміщалася в три рядки. Якщо залишити порожнім, картка не відображатиметься.","required":0,"rows":5,"new_lines":"br","maxlength":110},
+    {"key":"field_home_hero_quote_source","label":"Джерело цитати","name":"home_hero_quote_source","type":"text","instructions":"Наприклад: Маніфест UNIHUM.","required":0},
+    {"key":"field_home_hero_quote_link","label":"Посилання картки","name":"home_hero_quote_link","type":"link","instructions":"Необов'язкове посилання під джерелом цитати.","required":0,"return_format":"array"}
+  ],
+  "location":[[{"param":"page_template","operator":"==","value":"pages/home.php"}]],
+  "menu_order":0,"position":"normal","style":"default","label_placement":"top","instruction_placement":"label","hide_on_screen":"","active":true,"description":"Секції головної сторінки.","show_in_rest":0,"display_title":"","modified":1784232000
 }

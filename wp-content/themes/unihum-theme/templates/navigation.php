@@ -7,8 +7,10 @@ if (isset($args['location'])) {
 
 $args = array(
     'theme_location' => $location,
-    'container' => 'ul',
+    'container' => false,
     'menu_class' => 'nav-list',
+    'fallback_cb' => false,
+    'depth' => 1,
 );
 
 wp_nav_menu($args);

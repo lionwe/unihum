@@ -337,6 +337,24 @@
             "mime_types": "svg,png"
         },
         {
+            "key": "field_site_icon_button",
+            "label": "Іконка кнопки",
+            "name": "site_icon_button",
+            "type": "image",
+            "instructions": "Завантажте SVG або PNG іконку для основних кнопок сайту.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
             "key": "field_site_icon_address",
             "label": "Іконка адреси",
             "name": "site_icon_address",

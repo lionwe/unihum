@@ -12,7 +12,6 @@ class Header {
     this.handleKeydown = this.handleKeydown.bind(this);
     this.handlePanelClick = this.handlePanelClick.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-    this.lastScrollY = Math.max(0, window.scrollY);
 
     this.toggle.addEventListener("click", this.handleToggle);
     this.panel.addEventListener("click", this.handlePanelClick);
@@ -75,13 +74,6 @@ class Header {
       this.element.classList.remove("header--scrolled");
     }
 
-    if (currentScrollY > this.lastScrollY && currentScrollY > 100) {
-      this.element.classList.add("header--hidden");
-    } else {
-      this.element.classList.remove("header--hidden");
-    }
-
-    this.lastScrollY = currentScrollY;
   }
 }
 

@@ -1,1 +1,172 @@
-// stub
+@use "../utils/mixins" as *;
+@use "../base/fonts" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &--scrolled {
+    background-color: color-mix(in srgb, var(--color-neutral-50) 94%, transparent);
+    border-color: var(--color-secondary-muted);
+
+    .header__brand,
+    .header__navigation a,
+    .header__languages a {
+      color: var(--color-neutral-950);
+    }
+
+    .header__languages {
+      border-color: var(--color-secondary-muted);
+    }
+
+    .header__toggle {
+      border-color: var(--color-neutral-950);
+
+      span {
+        background-color: var(--color-neutral-950);
+      }
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: convert-to-rem(88px);
+    gap: convert-to-rem(24px);
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-white);
+    flex: 0 0 auto;
+  }
+
+  &__logo {
+    display: block;
+    width: convert-to-rem(172px);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+  }
+
+  &__brand-name {
+    @include typography($font-secondary, $fw-semibold, 30px, 1);
+  }
+
+  &__brand-description {
+    display: block;
+    max-width: convert-to-rem(150px);
+    margin-left: convert-to-rem(10px);
+    @include typography($font-primary, $fw-regular, 11px, 1.25);
+  }
+
+  &__panel {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(28px);
+  }
+
+  &__navigation {
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: convert-to-rem(28px);
+    }
+
+    a {
+      position: relative;
+      display: inline-flex;
+      padding-block: convert-to-rem(8px);
+      color: var(--color-white);
+      @include typography($font-primary, $fw-medium, 16px, 1.2);
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background-color: var(--color-primary-dark);
+        content: "";
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      @include hover {
+        &::after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary-dark);
+        outline-offset: convert-to-rem(4px);
+      }
+    }
+
+    .current-menu-item>a::after,
+    .current-menu-ancestor>a::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  &__languages {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(10px);
+    padding-left: convert-to-rem(20px);
+    border-left: 1px solid var(--color-white-30);
+    @include typography($font-primary, $fw-medium, 16px, 1);
+
+    a,
+    span {
+      display: block;
+      padding-block: convert-to-rem(8px);
+    }
+
+    a {
+      color: var(--color-white);
+    }
+
+    span {
+      color: var(--color-primary-dark);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--color-primary-dark);
+      outline-offset: convert-to-rem(4px);
+    }
+  }
+
+  &__toggle {
+    display: none;
+  }
+
+  @include mobile {
+    &__inner {
+      min-height: convert-to-rem(72px);
+    }
+
+    &__logo {
+      width: convert-to-rem(132px);
+    }
+
+  }
+}
