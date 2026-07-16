@@ -1,0 +1,161 @@
+@use "../../utils/mixins" as *;
+@use "../../base/fonts" as *;
+
+.created {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(convert-to-rem(64px), 8vw, convert-to-rem(112px));
+
+  &__heading {
+    display: grid;
+    justify-items: center;
+    gap: convert-to-rem(12px);
+    margin-bottom: clamp(convert-to-rem(28px), 4vw, convert-to-rem(48px));
+    text-align: center;
+  }
+
+  &__ornament {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(12px);
+    color: var(--color-primary-dark);
+    @include typography($font-primary, $fw-regular, 18px, 1);
+
+    &::before,
+    &::after {
+      width: clamp(convert-to-rem(36px), 5vw, convert-to-rem(72px));
+      height: convert-to-rem(1px);
+      background: var(--color-primary-20);
+      content: "";
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (40px, 64px), (44px, 70px));
+  }
+
+  &__slider.swiper {
+    position: relative;
+    width: 100%;
+    padding: convert-to-rem(24px) 0 convert-to-rem(48px);
+    overflow: hidden;
+  }
+
+  &__items {
+    align-items: center;
+  }
+
+  &__slide {
+    height: auto;
+    opacity: 0.42;
+    transform: scale(0.83);
+    transition: transform 350ms ease, opacity 350ms ease;
+  }
+
+  &__slide.swiper-slide-active {
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: clamp(convert-to-rem(330px), 29vw, convert-to-rem(410px));
+    height: 100%;
+    padding: clamp(convert-to-rem(28px), 3vw, convert-to-rem(44px));
+    overflow: hidden;
+    border: convert-to-rem(1px) solid var(--color-primary-20);
+    border-radius: convert-to-rem(20px);
+    background:
+      linear-gradient(135deg, var(--color-white-70), var(--color-white)),
+      var(--color-white);
+    box-shadow: 0 convert-to-rem(18px) convert-to-rem(36px) var(--color-secondary-20);
+    text-align: center;
+
+    &::before {
+      position: absolute;
+      top: convert-to-rem(-100px);
+      right: convert-to-rem(-100px);
+      width: convert-to-rem(220px);
+      aspect-ratio: 1;
+      border: convert-to-rem(1px) solid var(--color-primary-20);
+      border-radius: 50%;
+      box-shadow: 0 0 0 convert-to-rem(18px) var(--color-white-40);
+      content: "";
+    }
+  }
+
+  &__icon {
+    position: relative;
+    display: grid;
+    width: clamp(convert-to-rem(68px), 7vw, convert-to-rem(104px));
+    aspect-ratio: 1;
+    place-items: center;
+    margin-bottom: clamp(convert-to-rem(20px), 2vw, convert-to-rem(28px));
+    border: convert-to-rem(1px) solid var(--color-primary-20);
+    border-radius: 50%;
+    background: var(--color-white-70);
+    box-shadow: 0 convert-to-rem(10px) convert-to-rem(22px) var(--color-primary-20);
+  }
+
+  &__icon-image {
+    display: block;
+    width: 54%;
+    height: 54%;
+    object-fit: contain;
+  }
+
+  &__item-title {
+    position: relative;
+    margin: 0 0 convert-to-rem(14px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (24px, 36px), (28px, 40px));
+  }
+
+  &__item-description {
+    position: relative;
+    margin: 0;
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (15px, 17px), (22px, 26px));
+  }
+
+  &__item > .btn {
+    margin-top: auto;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(convert-to-rem(14px), 2vw, convert-to-rem(24px));
+    margin-top: clamp(convert-to-rem(24px), 3vw, convert-to-rem(36px));
+  }
+
+  @include mobile {
+    &__slide {
+      transform: scale(0.87);
+    }
+  }
+
+  @media screen and (max-width: convert-to-rem(575px)) {
+    &__item {
+      min-height: convert-to-rem(340px);
+      padding: convert-to-rem(28px) convert-to-rem(24px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    &__slide,
+    .btn--slider-navigation,
+    .btn-pagination .swiper-pagination-bullet {
+      transition: none;
+    }
+  }
+}

@@ -51,6 +51,58 @@
     }
   }
 
+  &--slider-navigation {
+    width: convert-to-rem(48px);
+    aspect-ratio: 1;
+    flex: 0 0 convert-to-rem(48px);
+    padding: 0;
+    border-color: var(--color-primary-20);
+    border-radius: 50%;
+    background-color: var(--color-white);
+    box-shadow: 0 convert-to-rem(8px) convert-to-rem(18px) var(--color-secondary-20);
+    color: var(--color-primary-dark);
+    @include typography($font-primary, $fw-regular, 24px, 1);
+
+    @include hover {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+      color: var(--color-white);
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+  }
+
+  &--primary-outline {
+    border-color: var(--color-primary-dark);
+    background-color: transparent;
+    color: var(--color-primary-dark);
+
+    @include hover {
+      background-color: var(--color-primary-dark);
+      color: var(--color-white);
+      transform: translateY(convert-to-rem(-1px));
+    }
+  }
+
+  &--has-mask-icon {
+    .btn__text {
+      display: none;
+    }
+
+    .btn__icon {
+      background-color: currentColor;
+      mask: var(--btn-icon-url) center / contain no-repeat;
+      -webkit-mask: var(--btn-icon-url) center / contain no-repeat;
+    }
+
+    .btn__image {
+      display: none;
+    }
+  }
+
   &__text {
     display: block;
   }
@@ -69,5 +121,31 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+}
+
+.btn-pagination.swiper-pagination-horizontal {
+  position: relative;
+  bottom: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: convert-to-rem(8px);
+  width: auto;
+
+  .swiper-pagination-bullet {
+    width: convert-to-rem(7px);
+    height: convert-to-rem(7px);
+    margin: 0;
+    border-radius: convert-to-rem(999px);
+    background-color: var(--color-neutral-600);
+    opacity: 0.34;
+    transition: width 250ms ease, background-color 250ms ease, opacity 250ms ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: convert-to-rem(38px);
+    background-color: var(--color-primary-dark);
+    opacity: 1;
   }
 }

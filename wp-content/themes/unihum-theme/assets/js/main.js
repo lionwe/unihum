@@ -21,6 +21,12 @@ if (document.querySelector(".swiper")) {
     console.error("Failed to load Swiper module:", error);
   });
 }
+
+if (document.querySelector("[data-created-slider]")) {
+  import("./components/home/created").catch((error) => {
+    console.error("Failed to load Created slider module:", error);
+  });
+}
 if (document.querySelector(".backdrop")) {
   import("./popups/main").catch((error) => {
     console.error("Failed to load Popups module:", error);

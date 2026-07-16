@@ -10,6 +10,8 @@
  *     @type string $target  Link target.
  *     @type int    $icon_id Icon attachment ID.
  *     @type string $type    Button type: button, submit or reset.
+ *     @type string $aria_label Accessible button label.
+ *     @type string $download Downloaded file name for link buttons.
  * }
  */
 
@@ -24,6 +26,10 @@ $icon_style = $icon_url
     ? sprintf("--btn-icon-url: url('%s');", esc_url($icon_url))
     : '';
 $type = isset($args['type']) ? sanitize_key((string) $args['type']) : 'button';
+$aria_label = isset($args['aria_label']) ? sanitize_text_field((string) $args['aria_label']) : '';
+$aria_label_attribute = $aria_label !== '' ? sprintf(' aria-label="%s"', esc_attr($aria_label)) : '';
+$download = isset($args['download']) ? sanitize_file_name((string) $args['download']) : '';
+$download_attribute = $download !== '' ? sprintf(' download="%s"', esc_attr($download)) : '';
 $additional_classes = isset($args['class']) ? (string) $args['class'] : 'btn--primary';
 
 if ($text === '') {
@@ -47,7 +53,7 @@ $button_class = trim(implode(' ', array_merge(array('btn'), $class_names)));
 
 if ($link === '') :
     ?>
-    <button class="<?php echo esc_attr($button_class); ?>" type="<?php echo esc_attr($type); ?>">
+    <button class="<?php echo esc_attr($button_class); ?>" type="<?php echo esc_attr($type); ?>"<?php echo $aria_label_attribute; ?>>
         <span class="btn__text"><?php echo esc_html($text); ?></span>
         <?php if ($icon_url !== '') : ?>
             <span class="btn__icon" style="<?php echo esc_attr($icon_style); ?>" aria-hidden="true">
@@ -63,6 +69,8 @@ endif;
     class="<?php echo esc_attr($button_class); ?>"
     href="<?php echo esc_url($link); ?>"
     target="<?php echo esc_attr($target); ?>"
+    <?php echo $aria_label_attribute; ?>
+    <?php echo $download_attribute; ?>
     <?php echo $target === '_blank' ? 'rel="noopener noreferrer"' : ''; ?>
 >
     <span class="btn__text"><?php echo esc_html($text); ?></span>

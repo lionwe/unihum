@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="document-title">
+  <title id="document-title">Document</title>
+  <path d="M17 6h22l12 12v40H17z" fill="none" stroke="#17263A" stroke-linejoin="round" stroke-width="3"/>
+  <path d="M39 6v13h12M25 31h18M25 39h18M25 47h12" fill="none" stroke="#17263A" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+</svg>
