@@ -1,0 +1,152 @@
+@use "../../utils/mixins" as *;
+@use "../../base/fonts" as *;
+
+.why-now {
+  padding-block: clamp(convert-to-rem(64px), 8vw, convert-to-rem(112px));
+  background-color: var(--color-white);
+
+  &__heading {
+    max-width: convert-to-rem(850px);
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: convert-to-rem(22px);
+    @include typography($font-secondary, $fw-semibold, (40px, 64px), (44px, 70px));
+  }
+
+  &__ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: convert-to-rem(16px);
+    width: min(convert-to-rem(256px), 100%);
+    margin: 0 auto convert-to-rem(22px);
+    color: var(--color-primary-dark);
+    @include typography($font-secondary, $fw-semibold, 22px, 1);
+
+    &::before,
+    &::after {
+      flex: 1;
+      height: convert-to-rem(1px);
+      background-color: currentcolor;
+      content: "";
+    }
+
+    &::before,
+    &::after {
+      opacity: 0.72;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    @include typography($font-primary, $fw-regular, (17px, 22px), (25px, 32px));
+    color: var(--color-neutral-600);
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(convert-to-rem(56px), 7vw, convert-to-rem(96px));
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: convert-to-rem(420px);
+    padding: 0;
+    text-align: center;
+
+    &:not(:first-child) {
+      border-left: convert-to-rem(1px) solid var(--color-secondary-muted);
+    }
+  }
+
+  &__icon {
+    display: grid;
+    width: clamp(convert-to-rem(100px), 9vw, convert-to-rem(136px));
+    aspect-ratio: 1;
+    place-items: center;
+    margin-bottom: clamp(convert-to-rem(28px), 2.5vw, convert-to-rem(40px));
+    border: 1px solid var(--color-primary-dark);
+    border-radius: 50%;
+    background-color: var(--color-white);
+    box-shadow: convert-to-rem(5px) convert-to-rem(5px) 0 var(--color-primary-light);
+  }
+
+  &__icon-image {
+    display: block;
+    width: 58%;
+    height: 58%;
+    object-fit: contain;
+  }
+
+  &__item-title {
+    max-width: convert-to-rem(300px);
+    margin: 0;
+    @include typography($font-secondary, $fw-semibold, (25px, 31px), (30px, 36px));
+  }
+
+  &__item-divider {
+    width: convert-to-rem(40px);
+    height: convert-to-rem(1px);
+    margin-block: convert-to-rem(24px);
+    background-color: var(--color-primary-dark);
+  }
+
+  &__item-description {
+    max-width: convert-to-rem(300px);
+    margin: 0;
+    @include typography($font-primary, $fw-regular, (16px, 18px), (25px, 28px));
+    color: var(--color-neutral-600);
+  }
+
+  @media screen and (max-width: convert-to-rem(1280px)) {
+    &__items {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__item {
+      min-height: 0;
+      min-height: convert-to-rem(370px);
+      padding-inline: 0;
+
+      &:not(:first-child) {
+        border-left: 0;
+      }
+
+      &:nth-child(even) {
+        border-left: convert-to-rem(1px) solid var(--color-secondary-muted);
+      }
+
+      &:nth-child(n + 3) {
+        padding-top: convert-to-rem(48px);
+        border-top: convert-to-rem(1px) solid var(--color-secondary-muted);
+      }
+    }
+  }
+
+  @media screen and (max-width: convert-to-rem(575px)) {
+    &__items {
+      grid-template-columns: 1fr;
+      gap: convert-to-rem(36px);
+    }
+
+    &__item {
+      padding-inline: 0;
+
+      &:not(:first-child) {
+        padding-top: convert-to-rem(36px);
+        border-top: convert-to-rem(1px) solid var(--color-secondary-muted);
+        border-left: 0;
+      }
+
+      &:nth-child(even) {
+        border-left: 0;
+      }
+    }
+  }
+}
