@@ -13,7 +13,7 @@ function enqueue_scripts_and_styles()
 {
     wp_enqueue_style(
         'theme-fonts',
-        'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap',
         array(),
         null
     );

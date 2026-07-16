@@ -30,28 +30,28 @@ select {
   display: block;
   width: 100%;
   padding: convert-to-rem(12px) convert-to-rem(14px);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-neutral-950);
   border-radius: convert-to-rem(5px);
   outline: none;
-  background-color: var(--color-surface-control);
-  color: var(--color-text);
+  background-color: var(--color-secondary-light);
+  color: var(--color-neutral-950);
   transition:
     border-color 0.3s ease,
     background-color 0.3s ease;
   @include typography($font-primary, $fw-regular, 14px, normal, -0.14px);
 
   &::placeholder {
-    color: var(--color-text-muted);
+    color: var(--color-neutral-600);
     opacity: 1;
   }
 
   &:focus {
     border-color: var(--color-primary);
-    background-color: var(--color-surface);
+    background-color: var(--color-neutral-50);
   }
 
   &[aria-invalid="true"] {
-    border-color: var(--color-danger);
+    border-color: var(--color-red-600);
   }
 }
 
@@ -60,7 +60,7 @@ select {
   display: block;
   width: 100%;
   margin-top: convert-to-rem(4px);
-  color: var(--color-danger);
+  color: var(--color-red-600);
   @include typography($font-primary, $fw-regular, 12px, 16px);
 }
 
@@ -72,7 +72,7 @@ select {
   width: 100%;
   min-height: convert-to-rem(148px);
   padding: convert-to-rem(20px);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-neutral-950);
   border-radius: convert-to-rem(12px);
   background-color: var(--color-white-70);
   color: var(--color-primary-dark);
