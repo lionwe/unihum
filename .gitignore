@@ -40,11 +40,7 @@ wp-config.php
 # 1.Ignore
 /wp-content/plugins/*
 
-# 2. Plugins
-!/wp-content/plugins/reIntegration/
-!/wp-content/plugins/reIntegrationSheets/
-!/wp-content/plugins/reIntegrationTelegram/
-# ---------------------------------------------------
+!/wp-content/plugins/leadforms-go/
 
 
 # All plugins
