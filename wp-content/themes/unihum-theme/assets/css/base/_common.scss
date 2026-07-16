@@ -1,0 +1,50 @@
+@use "../utils/mixins" as *;
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+:where(section, header, footer) {
+  width: 100vw;
+
+  &>.container {
+    width: min(90rem - var(--_section-offset) * 2,
+        100vw - var(--_section-offset) * 2);
+    margin-inline: auto;
+    height: 100%;
+  }
+}
+
+main {
+  display: grid;
+  gap: var(--_section-gap);
+  grid-auto-rows: max-content;
+}
+
+/* Smooth scrolling (On if needed) */
+
+// html.lenis,
+// html.lenis body {
+//   height: auto;
+// }
+
+// .lenis-smooth {
+//   scroll-behavior: auto !important;
+// }
+
+// .lenis-smooth [data-lenis-prevent] {
+//   overscroll-behavior: contain;
+// }
+
+// .lenis-stopped {
+//   overflow: hidden;
+// }
+
+// .lenis-scrolling iframe {
+//   pointer-events: none;
+// }

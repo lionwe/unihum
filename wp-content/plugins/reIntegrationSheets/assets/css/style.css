@@ -1,0 +1,90 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Arial', sans-serif;
+}
+
+body{
+	display: grid;
+	place-items: center;
+	height: 100vh;
+	overflow: hidden;
+	background: rgb(78, 161, 104);
+}
+form{
+	display: grid;
+	gap: 1rem;
+	label{
+		p{
+			font-size: 0.9rem;
+			margin-bottom: .25rem;
+		}
+		input, textarea{
+			width: 100%;
+			border: 1px solid #ffffff;
+			border-radius: 0.5rem;
+			padding: 0.5rem;
+			background: #ffffff59;
+			color: #000;
+			transition: all 0.3s ease;
+			&::placeholder{
+				color: #000;
+			}
+			&:focus, &:hover{
+				outline: none;
+				background: #ffffff22;
+			}
+		}
+	}
+	.google-auth-field{
+		#remove-token{
+			max-width:10rem ;
+			font-size: .9rem;
+			background: rgb(218, 100, 100);
+			color: white;
+			border: none;
+			&:hover{
+				cursor: help ;
+				background: rgb(203, 56, 56);
+			}
+		}
+		a{
+			width: max-content;
+			img{
+				width: auto;
+				height: 2rem;
+				object-fit: contain;
+			}
+		}
+	}
+	button{
+		border-radius: .75rem;
+		background-color: rgb(67, 142, 91);
+		color: #fff;
+		padding: .5rem;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		&:hover{
+			background-color: rgb(60, 126, 81);
+			scale: .99;
+		}
+	}
+}
+h1{
+	margin-bottom: 1rem;
+}
+#app{
+	border-radius: 1rem;
+	padding: 1rem;
+	background: #ffffff59;
+	border: 1px solid #ffffff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	display: grid;
+	gap: 1rem;
+	margin: 2rem;
+	max-width: 30rem;
+}

@@ -1,0 +1,16 @@
+.accordeon {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: all .5s ease;
+
+  .content {
+    min-height: 0;
+    overflow: hidden;
+    transition: height var(--_ts, 3.5s) ease;
+  }
+
+  &[open] {
+    grid-template-rows: 1fr;
+  }
+}

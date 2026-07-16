@@ -1,0 +1,58 @@
+@use "../utils/mixins" as *;
+
+:root {
+  // Gaps
+  --_section-gap: #{Clamp(8.125, 7.5rem)};
+  --_section-offset: #{Clamp(1rem, 4.375)};
+
+  // Color primitives
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-neutral-950: #292031;
+  --color-neutral-50: #f7f7fc;
+  --color-purple-900: #473770;
+  --color-purple-800: #513f80;
+  --color-purple-600: #774ba2;
+  --color-purple-500: #736693;
+  --color-purple-300: #a5a7d9;
+  --color-purple-200: #bbbce3;
+  --color-purple-100: #cb9ef6;
+  --color-lilac-200: #d2cae8;
+  --color-lilac-100: #d09ff9;
+  --color-lilac-50: #f4e7fa;
+  --color-lilac-25: #f5f2f8;
+  --color-red-600: #ee0606;
+
+  // Transparent colors
+  --color-black-60: rgba(0, 0, 0, 0.6);
+  --color-neutral-950-0: rgba(44, 28, 60, 0);
+  --color-white-70: rgba(255, 255, 255, 0.7);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-0: rgba(255, 255, 255, 0);
+  --color-purple-200-50: rgba(187, 188, 227, 0.5);
+  --color-lilac-300-20: rgba(199, 153, 234, 0.2);
+  --color-lilac-100-20: rgba(208, 159, 249, 0.2);
+
+  // Semantic colors
+  --color-primary: var(--color-purple-600);
+  --color-primary-dark: var(--color-purple-900);
+  --color-primary-border: var(--color-purple-800);
+  --color-primary-light: var(--color-purple-100);
+  --color-secondary: var(--color-purple-200);
+  --color-accent: var(--color-lilac-100);
+  --color-danger: var(--color-red-600);
+  --color-background: var(--color-white);
+  --color-background-accent: var(--color-purple-300);
+  --color-surface: var(--color-white);
+  --color-surface-glass: var(--color-white-20);
+  --color-surface-control: var(--color-white-70);
+  --color-text: var(--color-black);
+  --color-text-muted: var(--color-black-60);
+  --color-heading: var(--color-black);
+  --color-text-inverse: var(--color-white);
+  --color-border: var(--color-white-30);
+  --color-border-strong: var(--color-white);
+}

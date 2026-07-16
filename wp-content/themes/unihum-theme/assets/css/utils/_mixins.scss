@@ -1,0 +1,143 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:list";
+
+@mixin hover {
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      @content;
+    }
+  }
+}
+
+// Typography mixin with responsive font-size and line-height support
+@mixin typography($family, $weight, $size, $lh: normal, $ls: 0, $style: normal) {
+  font-family: $family;
+  font-weight: $weight;
+  font-style: $style;
+
+  // Font size: supports clamp for responsive values (min, max)
+  @if meta.type-of($size)=="list" and list.length($size)==2 {
+    font-size: Clamp(list.nth($size, 1), list.nth($size, 2));
+  }
+
+  @else {
+    font-size: convert-to-rem($size);
+  }
+
+  // Line height: supports clamp, normal keyword, or single value
+  @if meta.type-of($lh)=="list" and list.length($lh)==2 {
+    line-height: Clamp(list.nth($lh, 1), list.nth($lh, 2));
+  }
+
+  @else if $lh ==normal or meta.type-of($lh)=="string" {
+    line-height: $lh;
+  }
+
+  @else if meta.type-of($lh)=="number" and math.is-unitless($lh) {
+    line-height: $lh;
+  }
+
+  @else {
+    line-height: convert-to-rem($lh);
+  }
+
+  letter-spacing: convert-to-rem($ls);
+}
+
+@mixin mobile($max: 992px) {
+  @media screen and (max-width: $max) {
+    @content;
+  }
+}
+
+// @mixin tablet($min: 768px, $max: 992px) {
+//   @media screen and (min-width: $min) and (max-width: $max) {
+//     @content;
+//   }
+// }
+
+@mixin before($absolute: false) {
+  @if ($absolute) {
+    position: relative;
+  }
+
+  &::before {
+    @if ($absolute) {
+      position: absolute;
+    }
+
+    content: '';
+    @content;
+  }
+}
+
+@mixin after($absolute: false) {
+  @if ($absolute) {
+    position: relative;
+  }
+
+  &::after {
+    @if ($absolute) {
+      position: absolute;
+    }
+
+    content: '';
+    @content;
+  }
+}
+
+@mixin desktop($min: 992px) {
+  @media screen and (min-width: $min) {
+    @content;
+  }
+}
+
+@function convert-to-rem($value) {
+  @if math.is-unitless($value) {
+    // Якщо це просто число, вважаємо, що воно в px, і конвертуємо в rem
+    @return $value * 1rem;
+  }
+
+  @else if math.unit($value)=='px' {
+    // Конвертуємо px в rem (1rem = 16px)
+    @return math.div($value, 16px) * 1rem;
+  }
+
+  @else if math.unit($value)=='rem' {
+    // Якщо вже в rem, повертаємо значення без змін
+    @return $value;
+  }
+
+  @else {
+    @error "Одиниця #{$value} не підтримується. Використовуйте number, px або rem.";
+  }
+}
+
+@function Clamp($minVal, $maxVal) {
+  $minVal: convert-to-rem($minVal);
+  $maxVal: convert-to-rem($maxVal);
+
+  $minViewportWidth: convert-to-rem(375px);
+  $maxViewportWidth: convert-to-rem(1440px);
+
+  $slope: math.div(($maxVal - $minVal), ($maxViewportWidth - $minViewportWidth)); // Використовуємо math.div
+  $base: $minVal - ($slope * $minViewportWidth);
+
+  @return clamp(#{$minVal}, calc(#{$base} + #{$slope * 100vw}), #{$maxVal});
+}
+
+// Usage
+// .element {
+//   	font-size: Clamp(16px, 24px); 
+// or font-size: Clamp(1rem, 1.5rem); 
+// or font-size: Clamp(16, 24); - 16rem to 24rem
+// }

@@ -1,0 +1,648 @@
+{
+    "key": "group_site_options",
+    "title": "Налаштування сайту",
+    "fields": [
+        {
+            "key": "field_site_tab_main",
+            "label": "Головна інформація",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_phone",
+            "label": "Контактний телефон",
+            "name": "site_phone",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "+38 (000) 000-00-00",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_site_email",
+            "label": "Емейл",
+            "name": "site_email",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "info@example.com",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_site_address",
+            "label": "Адреса",
+            "name": "site_address",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "вул. Приклад, 1",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_site_address_editor",
+            "label": "Адреса (редактор)",
+            "name": "site_address_editor",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_site_header_btn_link",
+            "label": "Посилання кнопки в хедері",
+            "name": "site_header_btn_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_site_form_success_message",
+            "label": "Повідомлення після успішного відправлення форми",
+            "name": "site_form_success_message",
+            "type": "wysiwyg",
+            "instructions": "Повідомлення тимчасово відображається замість форми після успішного відправлення.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "<p>Дякуємо! Форму успішно відправлено.</p>",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_site_tab_socials",
+            "label": "Соцмережі",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_social_instagram",
+            "label": "Instagram посилання",
+            "name": "site_social_instagram",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://instagram.com/..."
+        },
+        {
+            "key": "field_site_icon_instagram",
+            "label": "Instagram Icon",
+            "name": "site_icon_instagram",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_social_facebook",
+            "label": "Facebook посилання",
+            "name": "site_social_facebook",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://facebook.com/..."
+        },
+        {
+            "key": "field_site_icon_facebook",
+            "label": "Facebook Icon",
+            "name": "site_icon_facebook",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_social_tiktok",
+            "label": "TikTok посилання",
+            "name": "site_social_tiktok",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://tiktok.com/..."
+        },
+        {
+            "key": "field_site_icon_tiktok",
+            "label": "TikTok Icon",
+            "name": "site_icon_tiktok",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_youtube",
+            "label": "YouTube Icon",
+            "name": "site_icon_youtube",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_tab_icons",
+            "label": "Іконки сайту",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_icon_phone",
+            "label": "Іконка телефону",
+            "name": "site_icon_phone",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_menu",
+            "label": "Іконка мобільного меню",
+            "name": "site_icon_menu",
+            "type": "image",
+            "instructions": "Завантажте світлу SVG або PNG іконку меню.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_menu_close",
+            "label": "Іконка закриття мобільного меню",
+            "name": "site_icon_menu_close",
+            "type": "image",
+            "instructions": "Завантажте SVG або PNG іконку хрестика для закриття мобільного меню.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_address",
+            "label": "Іконка адреси",
+            "name": "site_icon_address",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_email",
+            "label": "Іконка пошти",
+            "name": "site_icon_email",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,png"
+        },
+        {
+            "key": "field_site_icon_slider_previous",
+            "label": "Іконка слайдера назад",
+            "name": "site_icon_slider_previous",
+            "type": "image",
+            "instructions": "Завантажте SVG, WebP або AVIF іконку стрілки назад. Колір і розмір задаються у стилях теми.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,webp,avif"
+        },
+        {
+            "key": "field_site_icon_slider_next",
+            "label": "Іконка слайдера вперед",
+            "name": "site_icon_slider_next",
+            "type": "image",
+            "instructions": "Завантажте SVG, WebP або AVIF іконку стрілки вперед. Колір і розмір задаються у стилях теми.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,webp,avif"
+        },
+        {
+            "key": "field_site_icon_faq_plus",
+            "label": "Іконка плюса FAQ",
+            "name": "site_icon_faq_plus",
+            "type": "image",
+            "instructions": "Завантажте SVG, WebP або AVIF іконку плюса. Колір задається маскою у стилях теми.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,webp,avif"
+        },
+        {
+            "key": "field_site_icon_faq_minus",
+            "label": "Іконка мінуса FAQ",
+            "name": "site_icon_faq_minus",
+            "type": "image",
+            "instructions": "Завантажте SVG, WebP або AVIF іконку мінуса. Колір задається маскою у стилях теми.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "mime_types": "svg,webp,avif"
+        },
+        {
+            "key": "field_site_tab_footer",
+            "label": "Футер",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_footer_privacy",
+            "label": "Політика конфіденційності",
+            "name": "site_footer_privacy",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "allow_null": 1,
+            "allow_archives": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_site_footer_made_by",
+            "label": "Розробка (текст)",
+            "name": "site_footer_made_by",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Recipe",
+            "placeholder": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_site_footer_made_by_link",
+            "label": "Розробка (посилання)",
+            "name": "site_footer_made_by_link",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "https://recipe-agency.com.ua/",
+            "placeholder": ""
+        },
+        {
+            "key": "field_site_footer_copy",
+            "label": "Копірайт / Ліцензія",
+            "name": "site_footer_copy",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "2026© Всі права застережені. Ліцензія МОЗ серія АЕ №460148 від 30.04.2014",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_site_tab_contacts",
+            "label": "Контакти",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_cta_form_shortcode",
+            "label": "Шорткод форми для CTA",
+            "name": "site_cta_form_shortcode",
+            "type": "text",
+            "instructions": "Шорткод форми, який буде використовуватися для обох блоків CTA",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "[contact-form-7 id=\"...\"]",
+            "maxlength": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_site_tab_scripts",
+            "label": "Скріпти",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_site_scripts_head",
+            "label": "Скріпти в <head>",
+            "name": "site_scripts_head",
+            "type": "textarea",
+            "instructions": "Коди відстеження (GA, Facebook Pixel тощо), які мають бути в блоці <head>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "<script>...</script>",
+            "rows": 8,
+            "new_lines": ""
+        },
+        {
+            "key": "field_site_scripts_body",
+            "label": "Скріпти після відкриття <body>",
+            "name": "site_scripts_body",
+            "type": "textarea",
+            "instructions": "Коди (наприклад, GTM Noscript), які мають бути одразу після тегу <body>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "<noscript>...</noscript>",
+            "rows": 8,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1782132867
+}
