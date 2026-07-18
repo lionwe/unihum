@@ -73,10 +73,10 @@ if ($items === array()) {
                             <?php
                             get_template_part('templates/button', null, array(
                                 'link' => $file_url,
-                                'text' => __('Завантажити PDF', 'unihum'),
-                                'icon_id' => $slider_next_icon_id,
+                                'text' => __('Скачати PDF', 'unihum'),
+                                'aria_label' => sprintf(__('Скачати PDF: %s', 'unihum'), $item_title),
                                 'download' => $file_name,
-                                'class' => 'btn--primary-outline' . ($slider_next_icon_id ? ' btn--has-mask-icon' : ''),
+                                'class' => 'btn--primary-outline created__download',
                             ));
                             ?>
                         <?php endif; ?>
@@ -96,6 +96,9 @@ if ($items === array()) {
                     'icon_id' => $slider_previous_icon_id,
                 ));
                 ?>
+                <p class="created__counter" aria-live="polite">
+                    <span data-created-current>01</span><span aria-hidden="true"> / </span><span><?php echo esc_html(str_pad((string) count($items), 2, '0', STR_PAD_LEFT)); ?></span>
+                </p>
                 <div class="btn-pagination created__pagination" aria-label="<?php esc_attr_e('Навігація матеріалами', 'unihum'); ?>"></div>
                 <?php
                 get_template_part('templates/button', null, array(

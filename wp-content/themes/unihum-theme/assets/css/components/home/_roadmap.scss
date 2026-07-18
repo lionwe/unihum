@@ -1,0 +1,477 @@
+@use "../../utils/mixins" as *;
+@use "../../base/fonts" as *;
+
+.roadmap {
+  --roadmap-panel-height: clamp(#{convert-to-rem(330px)}, 31vw, #{convert-to-rem(440px)});
+  --roadmap-panel-offset: clamp(#{convert-to-rem(165px)}, 15.5vw, #{convert-to-rem(220px)});
+  --roadmap-decoration-right: clamp(#{convert-to-rem(22px)}, 5vw, #{convert-to-rem(66px)});
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: clamp(convert-to-rem(64px), 8vw, convert-to-rem(120px));
+  background-color: var(--color-neutral-50);
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image: radial-gradient(var(--color-neutral-600) convert-to-rem(1px), transparent convert-to-rem(1px));
+    background-size: convert-to-rem(22px) convert-to-rem(22px);
+    opacity: 0.12;
+    content: "";
+    mask-image: linear-gradient(to right, transparent, var(--color-black) 22%, var(--color-black) 78%, transparent);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: convert-to-rem(24px);
+  }
+
+  &__heading {
+    max-width: convert-to-rem(760px);
+  }
+
+  &__eyebrow,
+  &__period {
+    color: var(--color-primary-dark);
+    @include typography($font-primary, $fw-semibold, 14px, 1.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(10px);
+    margin-bottom: convert-to-rem(14px);
+
+    &::before {
+      width: convert-to-rem(28px);
+      height: convert-to-rem(1px);
+      background-color: currentcolor;
+      content: "";
+    }
+  }
+
+  &__title {
+    margin-bottom: convert-to-rem(16px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (40px, 64px), (44px, 70px));
+  }
+
+  &__description {
+    max-width: convert-to-rem(620px);
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (17px, 20px), (25px, 30px));
+  }
+
+  &__counter {
+    flex: 0 0 auto;
+    color: var(--color-neutral-600);
+    @include typography($font-secondary, $fw-semibold, 20px, 1);
+
+    [data-roadmap-current] {
+      color: var(--color-neutral-950);
+      @include typography($font-secondary, $fw-semibold, 44px, 1);
+    }
+  }
+
+  &__timeline {
+    margin-top: clamp(convert-to-rem(40px), 6vw, convert-to-rem(72px));
+  }
+
+  &__navigation {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--roadmap-steps, 5), minmax(0, 1fr));
+    gap: convert-to-rem(10px);
+    margin-bottom: clamp(convert-to-rem(28px), 4vw, convert-to-rem(42px));
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      top: convert-to-rem(19px);
+      right: 8%;
+      left: 8%;
+      height: convert-to-rem(1px);
+      background: linear-gradient(90deg, var(--color-primary-dark), var(--color-secondary-muted));
+      content: "";
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: convert-to-rem(44px);
+    margin-top: clamp(convert-to-rem(40px), 4vw, convert-to-rem(56px));
+    margin-bottom: clamp(convert-to-rem(20px), 3vw, convert-to-rem(32px));
+  }
+
+  &__hint {
+    display: inline-flex;
+    align-items: center;
+    gap: convert-to-rem(10px);
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, 14px, 1.4);
+  }
+
+  &__hint-icon {
+    display: block;
+    flex: 0 0 auto;
+    width: convert-to-rem(20px);
+    height: convert-to-rem(20px);
+    background-color: var(--color-primary-dark);
+    // stylelint-disable-next-line property-no-vendor-prefix
+    -webkit-mask: url("../images/svg/mouse-scroll.svg") center / contain no-repeat;
+    mask: url("../images/svg/mouse-scroll.svg") center / contain no-repeat;
+  }
+
+  &__step {
+    display: grid;
+    justify-items: center;
+    gap: convert-to-rem(10px);
+    min-width: 0;
+    color: var(--color-neutral-600);
+    text-align: center;
+    transition: color 240ms ease, transform 240ms ease;
+
+    @include hover {
+      color: var(--color-neutral-950);
+      transform: translateY(convert-to-rem(-3px));
+    }
+
+    &.is-active {
+      color: var(--color-neutral-950);
+    }
+
+    &:focus-visible {
+      outline: convert-to-rem(2px) solid var(--color-primary-dark);
+      outline-offset: convert-to-rem(4px);
+      border-radius: convert-to-rem(8px);
+    }
+  }
+
+  &__step-index {
+    display: grid;
+    width: convert-to-rem(40px);
+    aspect-ratio: 1;
+    place-items: center;
+    border: convert-to-rem(1px) solid var(--color-secondary-muted);
+    border-radius: 50%;
+    background-color: var(--color-neutral-50);
+    box-shadow: 0 0 0 convert-to-rem(6px) var(--color-neutral-50);
+    @include typography($font-primary, $fw-semibold, 13px, 1);
+    transition: background-color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+
+    .roadmap__step.is-active & {
+      border-color: var(--color-primary-dark);
+      background-color: var(--color-primary);
+      box-shadow: 0 0 0 convert-to-rem(6px) var(--color-primary-light);
+    }
+  }
+
+  &__step-period {
+    @include typography($font-primary, $fw-semibold, (12px, 14px), (16px, 18px));
+  }
+
+  &__panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: var(--roadmap-panel-height);
+    overflow: hidden;
+    border: convert-to-rem(1px) solid var(--color-white-70);
+    border-radius: convert-to-rem(24px);
+    background: linear-gradient(105deg, var(--color-white) 52%, var(--color-neutral-50)), var(--color-white);
+    box-shadow: 0 convert-to-rem(22px) convert-to-rem(50px) rgba(23, 38, 58, 0.08);
+    transition: opacity 520ms ease, transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    &.is-active {
+      z-index: 3;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    &.is-past {
+      z-index: 2;
+      opacity: 0.62;
+      transform: translateY(convert-to-rem(-20px)) scale(0.965);
+    }
+
+    &.is-future {
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(convert-to-rem(46px)) scale(0.98);
+      pointer-events: none;
+    }
+  }
+
+  &__panel-content {
+    position: relative;
+    z-index: 1;
+    grid-column: 1;
+    align-self: center;
+    max-width: convert-to-rem(600px);
+    padding: clamp(convert-to-rem(28px), 5vw, convert-to-rem(68px));
+  }
+
+  &__icon {
+    display: grid;
+    width: clamp(convert-to-rem(58px), 6vw, convert-to-rem(88px));
+    aspect-ratio: 1;
+    place-items: center;
+    margin-bottom: clamp(convert-to-rem(22px), 3vw, convert-to-rem(32px));
+    border: convert-to-rem(1px) solid var(--color-primary-20);
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    box-shadow: 0 convert-to-rem(10px) convert-to-rem(24px) var(--color-primary-20);
+  }
+
+  &__icon-image {
+    display: block;
+    width: 52%;
+    height: 52%;
+    object-fit: contain;
+  }
+
+  &__period {
+    margin-bottom: convert-to-rem(10px);
+  }
+
+  &__item-title {
+    max-width: convert-to-rem(460px);
+    margin-bottom: convert-to-rem(14px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (30px, 48px), (36px, 54px));
+  }
+
+  &__item-description {
+    max-width: convert-to-rem(530px);
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (16px, 18px), (24px, 28px));
+  }
+
+  &__panel-number {
+    position: absolute;
+    right: var(--roadmap-decoration-right);
+    bottom: convert-to-rem(20px);
+    z-index: 2;
+    margin: 0;
+    color: var(--color-primary);
+    opacity: 0.28;
+    @include typography($font-secondary, $fw-semibold, (160px, 240px), 0.85);
+    user-select: none;
+  }
+
+  &__panel-orbit {
+    position: absolute;
+    top: 50%;
+    right: clamp(convert-to-rem(12px), 4vw, convert-to-rem(70px));
+    z-index: 1;
+    width: clamp(convert-to-rem(250px), 30vw, convert-to-rem(430px));
+    aspect-ratio: 1;
+    color: var(--color-secondary);
+    transform: translateY(-50%);
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  }
+
+  &__panel--pattern-2,
+  &__panel--pattern-4 {
+    .roadmap__panel-orbit {
+      color: var(--color-primary-dark);
+    }
+  }
+
+  &__panel--reverse {
+    .roadmap__panel-content {
+      grid-column: 2;
+      justify-self: end;
+    }
+
+    .roadmap__panel-orbit {
+      right: auto;
+      left: clamp(convert-to-rem(12px), 4vw, convert-to-rem(70px));
+    }
+
+    .roadmap__panel-number {
+      right: auto;
+      left: var(--roadmap-decoration-right);
+    }
+  }
+
+  &__action {
+    margin-top: clamp(convert-to-rem(28px), 4vw, convert-to-rem(44px));
+    text-align: center;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: convert-to-rem(12px);
+    padding: convert-to-rem(14px) convert-to-rem(24px);
+    border: convert-to-rem(1px) solid var(--color-primary-dark);
+    border-radius: convert-to-rem(6px);
+    color: var(--color-neutral-950);
+    @include typography($font-primary, $fw-medium, 16px, 1.3);
+    transition: background-color 200ms ease, transform 200ms ease;
+
+    @include hover {
+      background-color: var(--color-primary);
+      transform: translateY(convert-to-rem(-2px));
+    }
+
+    &:focus-visible {
+      outline: convert-to-rem(2px) solid var(--color-primary-dark);
+      outline-offset: convert-to-rem(4px);
+    }
+  }
+
+  @media screen and (min-width: convert-to-rem(993px)) {
+    padding-bottom: 0;
+
+    &__header {
+      position: sticky;
+      z-index: 6;
+      top: convert-to-rem(88px);
+      padding-top: convert-to-rem(24px);
+    }
+
+    &__timeline {
+      min-height: calc((var(--roadmap-steps) - 1) * 72vh + 82vh);
+    }
+
+    &__navigation {
+      position: sticky;
+      z-index: 6;
+      top: convert-to-rem(270px);
+      padding-top: convert-to-rem(16px);
+
+      &::before {
+        top: convert-to-rem(36px);
+      }
+    }
+
+    &__controls {
+      position: sticky;
+      z-index: 6;
+      top: convert-to-rem(370px);
+      padding-block: convert-to-rem(10px) convert-to-rem(18px);
+    }
+
+    &__panels {
+      position: sticky;
+      top: calc(50vh - var(--roadmap-panel-offset) + #{convert-to-rem(170px)});
+      min-height: var(--roadmap-panel-height);
+    }
+
+    &__panel {
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  @media screen and (max-width: convert-to-rem(1200px)) {
+    &__panel {
+      grid-template-columns: 1fr;
+    }
+
+    &__panel-number {
+      right: convert-to-rem(24px);
+      bottom: convert-to-rem(20px);
+    }
+
+    &__panel-orbit {
+      right: convert-to-rem(-55px);
+      opacity: 0.65;
+    }
+
+    &__panel--reverse {
+      .roadmap__panel-content {
+        grid-column: 1;
+        justify-self: start;
+      }
+
+      .roadmap__panel-orbit {
+        right: convert-to-rem(-55px);
+        left: auto;
+      }
+
+      .roadmap__panel-number {
+        right: convert-to-rem(24px);
+        left: auto;
+      }
+    }
+  }
+
+  @include mobile {
+    &__header {
+      display: block;
+    }
+
+    &__counter {
+      margin-top: convert-to-rem(22px);
+    }
+
+    &__navigation {
+      display: flex;
+      gap: convert-to-rem(24px);
+      padding: convert-to-rem(8px) convert-to-rem(4px) convert-to-rem(12px);
+      overflow-x: auto;
+      scrollbar-width: thin;
+
+      &::before {
+        right: 0;
+        left: 0;
+      }
+    }
+
+    &__controls {
+      margin-bottom: convert-to-rem(20px);
+    }
+
+    &__step {
+      flex: 0 0 convert-to-rem(92px);
+    }
+
+    &__panel-content {
+      padding: convert-to-rem(32px) convert-to-rem(24px) convert-to-rem(110px);
+    }
+
+    &__panel:not(.is-active) {
+      display: none;
+    }
+
+    &__panel-number {
+      right: convert-to-rem(18px) !important;
+      left: auto !important;
+      bottom: convert-to-rem(14px);
+    }
+
+    &__panel-orbit {
+      top: auto;
+      right: convert-to-rem(-68px) !important;
+      left: auto !important;
+      bottom: convert-to-rem(-105px);
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__step,
+    &__step-index,
+    &__link,
+    &__panel {
+      transition: none;
+    }
+  }
+}

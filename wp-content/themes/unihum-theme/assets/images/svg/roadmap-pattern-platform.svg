@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+  <g fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="67" y="67" width="286" height="286" rx="36"/>
+    <path d="M138 138h144M138 210h144M138 282h144M138 138v144M210 138v144M282 138v144"/>
+    <path d="M102 210h36M282 210h36M210 102v36M210 282v36"/>
+  </g>
+  <g fill="currentColor">
+    <circle cx="138" cy="138" r="8"/><circle cx="210" cy="138" r="8"/><circle cx="282" cy="138" r="8"/>
+    <circle cx="138" cy="210" r="8"/><circle cx="210" cy="210" r="12"/><circle cx="282" cy="210" r="8"/>
+    <circle cx="138" cy="282" r="8"/><circle cx="210" cy="282" r="8"/><circle cx="282" cy="282" r="8"/>
+  </g>
+</svg>

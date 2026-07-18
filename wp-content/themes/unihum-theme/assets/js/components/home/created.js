@@ -13,15 +13,26 @@ document.querySelectorAll("[data-created-slider]").forEach((slider) => {
     return;
   }
 
+  const currentElement = section.querySelector("[data-created-current]");
+  const updateCurrentSlide = (swiper) => {
+    if (!currentElement) {
+      return;
+    }
+
+    currentElement.textContent = String(swiper.realIndex + 1).padStart(2, "0");
+  };
+
   new Swiper(slider, {
     modules: [A11y, Keyboard, Navigation, Pagination],
     centeredSlides: true,
     grabCursor: true,
+    slideToClickedSlide: true,
+    watchSlidesProgress: true,
     keyboard: {
       enabled: true,
     },
-    loop: slideCount > 2,
-    slidesPerView: 1.14,
+    loop: slideCount > 3,
+    slidesPerView: 1.08,
     spaceBetween: 16,
     navigation: {
       nextEl: section.querySelector(".created__navigation--next"),
@@ -31,13 +42,21 @@ document.querySelectorAll("[data-created-slider]").forEach((slider) => {
       el: section.querySelector(".created__pagination"),
       clickable: true,
     },
+    on: {
+      init: updateCurrentSlide,
+      slideChange: updateCurrentSlide,
+    },
     breakpoints: {
       576: {
-        slidesPerView: 1.45,
+        slidesPerView: 1.65,
         spaceBetween: 24,
       },
       992: {
-        slidesPerView: 1.8,
+        slidesPerView: 2,
+        spaceBetween: 28,
+      },
+      1200: {
+        slidesPerView: 3,
         spaceBetween: 28,
       },
     },

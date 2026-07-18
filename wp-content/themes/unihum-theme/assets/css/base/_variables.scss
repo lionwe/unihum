@@ -2,15 +2,15 @@
 
 :root {
   // Gaps
-  --_section-gap: #{Clamp(8.125, 7.5rem)};
-  --_section-offset: #{Clamp(1rem, 4.375)};
+  --_section-gap: #{Clamp(0px, 0rem)};
+  --_section-offset: #{Clamp(1rem, 3.375)};
 
   // Color primitives
   --color-black: #000000;
   --color-white: #ffffff;
   --color-neutral-950: #17263a;
   --color-neutral-600: #526274;
-  --color-neutral-50: #fffcf4;
+  --color-neutral-50: #f6f6f6;
   --color-primary: #f3c84b;
   --color-primary-dark: #d6a72d;
   --color-primary-light: #fff3c9;

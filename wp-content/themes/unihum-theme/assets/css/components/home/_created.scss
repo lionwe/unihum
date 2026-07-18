@@ -40,30 +40,37 @@
   &__slider.swiper {
     position: relative;
     width: 100%;
-    padding: convert-to-rem(24px) 0 convert-to-rem(48px);
-    overflow: hidden;
+    padding: convert-to-rem(24px) 0 convert-to-rem(32px);
   }
 
   &__items {
-    align-items: center;
+    align-items: stretch;
   }
 
   &__slide {
+    display: flex;
     height: auto;
-    opacity: 0.42;
-    transform: scale(0.83);
-    transition: transform 350ms ease, opacity 350ms ease;
+    opacity: 0.62;
+    transform: scale(0.94);
+    cursor: pointer;
+    transition: transform 350ms ease, opacity 350ms ease, filter 350ms ease;
   }
 
   &__slide.swiper-slide-active {
     z-index: 1;
     opacity: 1;
     transform: scale(1);
+
+    .created__item {
+      border-color: var(--color-primary-dark);
+      box-shadow: 0 convert-to-rem(24px) convert-to-rem(48px) var(--color-secondary-20);
+    }
   }
 
   &__item {
     position: relative;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     min-height: clamp(convert-to-rem(330px), 29vw, convert-to-rem(410px));
@@ -77,6 +84,7 @@
       var(--color-white);
     box-shadow: 0 convert-to-rem(18px) convert-to-rem(36px) var(--color-secondary-20);
     text-align: center;
+    transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
 
     &::before {
       position: absolute;
@@ -115,7 +123,7 @@
     position: relative;
     margin: 0 0 convert-to-rem(14px);
     color: var(--color-neutral-950);
-    @include typography($font-secondary, $fw-semibold, (24px, 36px), (28px, 40px));
+    @include typography($font-secondary, $fw-semibold, (24px, 30px), (28px, 40px));
   }
 
   &__item-description {
@@ -125,8 +133,20 @@
     @include typography($font-primary, $fw-regular, (15px, 17px), (22px, 26px));
   }
 
-  &__item > .btn {
+  &__item>.btn {
     margin-top: auto;
+  }
+
+  &__download {
+    gap: convert-to-rem(10px);
+    margin-top: clamp(convert-to-rem(24px), 3vw, convert-to-rem(32px));
+    padding: convert-to-rem(13px) convert-to-rem(20px);
+    border-radius: convert-to-rem(12px);
+
+    &::after {
+      content: "↓";
+      @include typography($font-primary, $fw-semibold, 18px, 1);
+    }
   }
 
   &__controls {
@@ -137,9 +157,17 @@
     margin-top: clamp(convert-to-rem(24px), 3vw, convert-to-rem(36px));
   }
 
+  &__counter {
+    min-width: convert-to-rem(48px);
+    margin: 0;
+    color: var(--color-neutral-600);
+    text-align: center;
+    @include typography($font-primary, $fw-semibold, 14px, 1);
+  }
+
   @include mobile {
     &__slide {
-      transform: scale(0.87);
+      transform: scale(0.96);
     }
   }
 
@@ -147,6 +175,12 @@
     &__item {
       min-height: convert-to-rem(340px);
       padding: convert-to-rem(28px) convert-to-rem(24px);
+    }
+  }
+
+  @media screen and (min-width: convert-to-rem(768px)) {
+    &__item {
+      min-height: convert-to-rem(390px);
     }
   }
 

@@ -27,6 +27,12 @@ if (document.querySelector("[data-created-slider]")) {
     console.error("Failed to load Created slider module:", error);
   });
 }
+
+if (document.querySelector("[data-roadmap]")) {
+  import("./components/home/roadmap").catch((error) => {
+    console.error("Failed to load Roadmap module:", error);
+  });
+}
 if (document.querySelector(".backdrop")) {
   import("./popups/main").catch((error) => {
     console.error("Failed to load Popups module:", error);

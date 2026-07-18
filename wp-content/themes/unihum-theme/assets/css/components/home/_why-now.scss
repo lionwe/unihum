@@ -2,151 +2,251 @@
 @use "../../base/fonts" as *;
 
 .why-now {
-  padding-block: clamp(convert-to-rem(64px), 8vw, convert-to-rem(112px));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(convert-to-rem(72px), 9vw, convert-to-rem(136px));
   background-color: var(--color-white);
 
+  &::before {
+    position: absolute;
+    bottom: clamp(convert-to-rem(-230px), -12vw, convert-to-rem(-100px));
+    left: clamp(convert-to-rem(-130px), -6vw, convert-to-rem(-56px));
+    z-index: -1;
+    width: clamp(convert-to-rem(320px), 37vw, convert-to-rem(560px));
+    aspect-ratio: 1;
+    border: convert-to-rem(1px) solid var(--color-secondary-muted);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 convert-to-rem(34px) var(--color-white),
+      0 0 0 convert-to-rem(35px) var(--color-primary-20),
+      0 0 0 convert-to-rem(80px) var(--color-white),
+      0 0 0 convert-to-rem(81px) var(--color-primary-20);
+    content: "";
+  }
+
+  &::after {
+    position: absolute;
+    bottom: clamp(convert-to-rem(-95px), -4vw, convert-to-rem(-40px));
+    left: clamp(convert-to-rem(64px), 8vw, convert-to-rem(170px));
+    z-index: -1;
+    width: clamp(convert-to-rem(200px), 22vw, convert-to-rem(340px));
+    aspect-ratio: 1;
+    border: convert-to-rem(1px) solid var(--color-primary-20);
+    border-radius: 50%;
+    background-image: radial-gradient(var(--color-primary-dark) convert-to-rem(2px), transparent convert-to-rem(2px));
+    background-size: convert-to-rem(36px) convert-to-rem(36px);
+    opacity: 0.48;
+    content: "";
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: minmax(convert-to-rem(280px), 0.78fr) minmax(0, 1.22fr);
+    gap: clamp(convert-to-rem(48px), 9vw, convert-to-rem(148px));
+    align-items: start;
+  }
+
   &__heading {
-    max-width: convert-to-rem(850px);
-    margin-inline: auto;
-    text-align: center;
+    position: sticky;
+    top: convert-to-rem(128px);
+    max-width: convert-to-rem(410px);
+    padding-top: clamp(convert-to-rem(18px), 3vw, convert-to-rem(52px));
   }
 
-  &__title {
-    margin-bottom: convert-to-rem(22px);
-    @include typography($font-secondary, $fw-semibold, (40px, 64px), (44px, 70px));
-  }
-
-  &__ornament {
+  &__eyebrow {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: convert-to-rem(16px);
-    width: min(convert-to-rem(256px), 100%);
-    margin: 0 auto convert-to-rem(22px);
+    gap: convert-to-rem(14px);
+    width: min(convert-to-rem(160px), 100%);
+    margin-bottom: clamp(convert-to-rem(24px), 3vw, convert-to-rem(34px));
     color: var(--color-primary-dark);
-    @include typography($font-secondary, $fw-semibold, 22px, 1);
+    @include typography($font-primary, $fw-semibold, 16px, 1);
 
     &::before,
     &::after {
       flex: 1;
       height: convert-to-rem(1px);
-      background-color: currentcolor;
+      background-color: var(--color-primary-dark);
       content: "";
     }
+  }
 
-    &::before,
-    &::after {
-      opacity: 0.72;
-    }
+  &__title {
+    max-width: convert-to-rem(360px);
+    margin: 0 0 clamp(convert-to-rem(24px), 3vw, convert-to-rem(34px));
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (42px, 60px), (48px, 68px));
   }
 
   &__description {
+    max-width: convert-to-rem(350px);
     margin: 0;
-    @include typography($font-primary, $fw-regular, (17px, 22px), (25px, 32px));
     color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (16px, 18px), (24px, 28px));
   }
 
   &__items {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: clamp(convert-to-rem(56px), 7vw, convert-to-rem(96px));
+    gap: clamp(convert-to-rem(28px), 4vw, convert-to-rem(48px));
   }
 
   &__item {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    // col 1 — number, col 2 — icon, col 3 — text
+    grid-template-columns:
+      clamp(convert-to-rem(44px), 4vw, convert-to-rem(64px))
+      clamp(convert-to-rem(86px), 8vw, convert-to-rem(112px))
+      minmax(0, 1fr);
+    gap: clamp(convert-to-rem(16px), 2vw, convert-to-rem(32px));
     align-items: center;
-    min-height: convert-to-rem(420px);
-    padding: 0;
-    text-align: center;
+    min-height: clamp(convert-to-rem(104px), 10vw, convert-to-rem(128px));
+  }
 
-    &:not(:first-child) {
-      border-left: convert-to-rem(1px) solid var(--color-secondary-muted);
-    }
+  // ─── Number column ─────────────────────────────────────────────────────────
+
+  &__item-index {
+    position: relative;
+    z-index: 1;
+    // Centre the digit within the full row height
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-dark);
+    @include typography($font-secondary, $fw-semibold, (26px, 32px), 1);
+  }
+
+  // Connector line: from the bottom of the digit to the top of the next digit.
+  // Equal gap on both sides = the gap value of __items / 2.
+  &__item:not(:last-child) .why-now__item-index::after {
+    position: absolute;
+    // Start exactly at the bottom edge of the __item-index cell
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    // Height equals the __items gap so it spans exactly the space between rows
+    height: clamp(convert-to-rem(28px), 4vw, convert-to-rem(48px));
+    width: convert-to-rem(1px);
+    background: linear-gradient(to bottom, var(--color-primary-dark), var(--color-primary));
+    box-shadow: 0 0 convert-to-rem(8px) var(--color-primary-20);
+    content: "";
+  }
+
+  // ─── Icon column ───────────────────────────────────────────────────────────
+
+  &__item-marker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
   }
 
   &__icon {
     display: grid;
-    width: clamp(convert-to-rem(100px), 9vw, convert-to-rem(136px));
+    width: clamp(convert-to-rem(72px), 7vw, convert-to-rem(100px));
     aspect-ratio: 1;
     place-items: center;
-    margin-bottom: clamp(convert-to-rem(28px), 2.5vw, convert-to-rem(40px));
-    border: 1px solid var(--color-primary-dark);
+    border: convert-to-rem(1px) solid var(--color-primary-20);
     border-radius: 50%;
     background-color: var(--color-white);
-    box-shadow: convert-to-rem(5px) convert-to-rem(5px) 0 var(--color-primary-light);
+    box-shadow: 0 convert-to-rem(14px) convert-to-rem(28px) var(--color-secondary-20);
   }
 
   &__icon-image {
     display: block;
-    width: 58%;
-    height: 58%;
+    width: 54%;
+    height: 54%;
     object-fit: contain;
   }
 
-  &__item-title {
-    max-width: convert-to-rem(300px);
-    margin: 0;
-    @include typography($font-secondary, $fw-semibold, (25px, 31px), (30px, 36px));
+  // ─── Text column ───────────────────────────────────────────────────────────
+
+  &__item-content {
+    padding-block: convert-to-rem(12px);
   }
 
-  &__item-divider {
-    width: convert-to-rem(40px);
-    height: convert-to-rem(1px);
-    margin-block: convert-to-rem(24px);
-    background-color: var(--color-primary-dark);
+  &__item-title {
+    margin: 0 0 convert-to-rem(16px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (24px, 30px), (30px, 36px));
+
+    &::after {
+      display: block;
+      width: convert-to-rem(28px);
+      height: convert-to-rem(1px);
+      margin-top: convert-to-rem(14px);
+      background-color: var(--color-primary-dark);
+      content: "";
+    }
   }
 
   &__item-description {
-    max-width: convert-to-rem(300px);
+    max-width: convert-to-rem(480px);
     margin: 0;
-    @include typography($font-primary, $fw-regular, (16px, 18px), (25px, 28px));
     color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (16px, 17px), (23px, 26px));
   }
 
-  @media screen and (max-width: convert-to-rem(1280px)) {
-    &__items {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  // ─── Tablet / narrow desktop ───────────────────────────────────────────────
 
-    &__item {
-      min-height: 0;
-      min-height: convert-to-rem(370px);
-      padding-inline: 0;
-
-      &:not(:first-child) {
-        border-left: 0;
-      }
-
-      &:nth-child(even) {
-        border-left: convert-to-rem(1px) solid var(--color-secondary-muted);
-      }
-
-      &:nth-child(n + 3) {
-        padding-top: convert-to-rem(48px);
-        border-top: convert-to-rem(1px) solid var(--color-secondary-muted);
-      }
-    }
-  }
-
-  @media screen and (max-width: convert-to-rem(575px)) {
-    &__items {
+  @media screen and (max-width: convert-to-rem(991px)) {
+    &__layout {
       grid-template-columns: 1fr;
-      gap: convert-to-rem(36px);
+      gap: clamp(convert-to-rem(44px), 7vw, convert-to-rem(72px));
+    }
+
+    &__heading {
+      position: relative;
+      top: auto;
+      max-width: convert-to-rem(620px);
+      padding-top: 0;
+    }
+
+    &__title,
+    &__description {
+      max-width: convert-to-rem(580px);
+    }
+  }
+
+  // ─── Mobile ────────────────────────────────────────────────────────────────
+
+  @include mobile {
+    // Tighter gap on mobile — connector line height must match
+    --why-now-gap: #{convert-to-rem(24px)};
+
+    &__items {
+      gap: var(--why-now-gap);
     }
 
     &__item {
-      padding-inline: 0;
+      grid-template-columns: convert-to-rem(32px) convert-to-rem(64px) minmax(0, 1fr);
+      gap: convert-to-rem(14px);
+      // Keep align-items: center so number stays visually centred with the icon
+      align-items: center;
+      min-height: convert-to-rem(64px);
+    }
 
-      &:not(:first-child) {
-        padding-top: convert-to-rem(36px);
-        border-top: convert-to-rem(1px) solid var(--color-secondary-muted);
-        border-left: 0;
-      }
+    &__icon {
+      width: convert-to-rem(64px);
+    }
 
-      &:nth-child(even) {
-        border-left: 0;
-      }
+    &__item-index {
+      @include typography($font-secondary, $fw-semibold, 22px, 1);
+    }
+
+    // On mobile the connector must equal the mobile gap
+    &__item:not(:last-child) .why-now__item-index::after {
+      height: var(--why-now-gap);
+    }
+
+    &__item-content {
+      padding-block: 0;
+    }
+
+    &__item-title {
+      margin-bottom: convert-to-rem(10px);
     }
   }
 }
