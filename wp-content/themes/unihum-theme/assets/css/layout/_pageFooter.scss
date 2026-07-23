@@ -1,1 +1,248 @@
-// stub
+@use "../utils/mixins" as *;
+@use "../base/fonts" as *;
+
+.footer {
+  padding-block: Clamp(40px, 70px);
+  color: var(--color-neutral-950);
+  background-color: var(--color-white);
+
+  &__top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: Clamp(24px, 48px);
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      gap: convert-to-rem(28px);
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: convert-to-rem(8px);
+    min-width: 0;
+
+    .custom-logo-link,
+    .custom-logo {
+      display: block;
+    }
+
+    .custom-logo {
+      width: convert-to-rem(154px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    @include mobile {
+      align-self: center;
+      text-align: center;
+    }
+  }
+
+  &__brand-link {
+    @include typography($font-secondary, $fw-semibold, 30px, 1);
+  }
+
+  &__tagline {
+    max-width: convert-to-rem(200px);
+    color: var(--color-primary-dark);
+    text-align: center;
+    text-wrap: balance;
+    @include typography($font-secondary, $fw-semibold, (16px, 18px), 1.2, 0.8px);
+  }
+
+  &__navigation {
+    min-width: 0;
+
+    .nav-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: convert-to-rem(16px) Clamp(20px, 52px);
+    }
+
+    a {
+      position: relative;
+      display: inline-flex;
+      padding-block: convert-to-rem(8px);
+      @include typography($font-primary, $fw-medium, (16px, 18px), 1.2);
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background-color: var(--color-primary-dark);
+        content: "";
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      @include hover {
+        &::after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+
+      &:focus-visible {
+        outline: convert-to-rem(2px) solid var(--color-primary-dark);
+        outline-offset: convert-to-rem(4px);
+      }
+    }
+
+    .current-menu-item>a::after,
+    .current-menu-ancestor>a::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    @include mobile {
+      width: 100%;
+
+      .nav-list {
+        flex-direction: row;
+        gap: convert-to-rem(8px) convert-to-rem(20px);
+      }
+    }
+  }
+
+  &__language-navigation {
+    justify-self: end;
+
+    @include mobile {
+      align-self: center;
+    }
+  }
+
+  &__languages {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(10px);
+    padding-left: convert-to-rem(20px);
+    border-left: 1px solid var(--color-secondary-muted);
+    @include typography($font-primary, $fw-medium, 16px, 1);
+
+    @include mobile {
+      gap: convert-to-rem(16px);
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  &__language {
+    a,
+    span {
+      display: block;
+      padding-block: convert-to-rem(8px);
+    }
+
+    a {
+      color: var(--color-neutral-950);
+      transition: color 0.2s ease;
+
+      @include hover {
+        color: var(--color-primary-dark);
+      }
+
+      &:focus-visible {
+        outline: convert-to-rem(2px) solid var(--color-primary-dark);
+        outline-offset: convert-to-rem(4px);
+      }
+    }
+
+    span[aria-current="page"] {
+      color: var(--color-primary-dark);
+    }
+  }
+
+  &__bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "copyright privacy made-by";
+    align-items: center;
+    gap: convert-to-rem(24px);
+    margin-top: Clamp(36px, 56px);
+    padding-top: Clamp(24px, 36px);
+    border-top: 1px solid var(--color-secondary-muted);
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (14px, 16px), 1.5);
+
+    @include mobile {
+      display: flex;
+      flex-direction: column;
+      gap: convert-to-rem(16px);
+      text-align: center;
+    }
+  }
+
+  &__copyright {
+    grid-area: copyright;
+    min-width: 0;
+  }
+
+  &__privacy {
+    grid-area: privacy;
+    justify-self: center;
+    transition: color 0.2s ease;
+
+    @include hover {
+      color: var(--color-neutral-950);
+    }
+
+    &:focus-visible {
+      outline: convert-to-rem(2px) solid var(--color-primary-dark);
+      outline-offset: convert-to-rem(4px);
+    }
+
+    @include mobile {
+      order: 2;
+    }
+  }
+
+  &__made-by {
+    grid-area: made-by;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: convert-to-rem(6px);
+    min-width: 0;
+    text-align: right;
+
+    a {
+      color: var(--color-neutral-950);
+      text-decoration: underline;
+      text-decoration-color: var(--color-secondary-muted);
+      text-underline-offset: convert-to-rem(4px);
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+      @include hover {
+        color: var(--color-primary-dark);
+        text-decoration-color: currentColor;
+      }
+
+      &:focus-visible {
+        outline: convert-to-rem(2px) solid var(--color-primary-dark);
+        outline-offset: convert-to-rem(4px);
+      }
+    }
+
+    @include mobile {
+      order: 3;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__made-by-name {
+    color: var(--color-neutral-950);
+  }
+}
