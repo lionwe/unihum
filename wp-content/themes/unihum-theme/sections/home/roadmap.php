@@ -1,60 +1,17 @@
 <?php
-$title = (string) get_field('home_roadmap_title');
-$description = (string) get_field('home_roadmap_description');
+$title = trim((string) get_field('home_roadmap_title'));
+$description = trim((string) get_field('home_roadmap_description'));
 $items = get_field('home_roadmap_items');
 $link = get_field('home_roadmap_link');
 $fallback_icon_url = get_template_directory_uri() . '/assets/images/svg/document.svg';
-$pattern_files = array(
-    'roadmap-pattern-foundation.svg',
-    'roadmap-pattern-community.svg',
-    'roadmap-pattern-platform.svg',
-    'roadmap-pattern-culture.svg',
-    'roadmap-pattern-planetary.svg',
-);
-$fallback_items = array(
-    array(
-        'period' => '2026–2027',
-        'title' => __('Фундаментальний етап', 'unihum'),
-        'description' => __('Формування концепції проєкту, ключових документів і першої міжнародної спільноти.', 'unihum'),
-    ),
-    array(
-        'period' => '2027–2029',
-        'title' => __('Формування спільноти', 'unihum'),
-        'description' => __('Створення міжнародного дослідницького співтовариства та програми.', 'unihum'),
-    ),
-    array(
-        'period' => '2028–2031',
-        'title' => __('Інтелектуальна платформа', 'unihum'),
-        'description' => __('Розробка платформи знань, інструментів аналізу й систем досліджень.', 'unihum'),
-    ),
-    array(
-        'period' => '2030–2035',
-        'title' => __('Освіта й культура', 'unihum'),
-        'description' => __('Освітні програми, медіапроєкти та глобальні культурні ініціативи.', 'unihum'),
-    ),
-    array(
-        'period' => '2035–2045',
-        'title' => __('Планетарна спільнота', 'unihum'),
-        'description' => __('Формування культури єдності, співпраці та глобальної відповідальності.', 'unihum'),
-    ),
-);
 
-if ($title === '') {
-    $title = __('Дорожня карта 2026–2045', 'unihum');
+if (!is_array($items)) {
+    $items = array();
 }
 
-if ($description === '') {
-    $description = __('Шлях від дослідницької ініціативи до планетарної спільноти.', 'unihum');
-}
-
-if (!is_array($items) || $items === array()) {
-    $items = $fallback_items;
-}
-
-$items = array_values(array_filter($items, static function ($item) {
-    return is_array($item)
-        && ((string) ($item['home_roadmap_item_title'] ?? '') !== ''
-            || (string) ($item['title'] ?? '') !== '');
+$items = array_values(array_filter($items, static function ($feature) {
+    return is_array($feature)
+        && ((string) ($feature['home_roadmap_item_title'] ?? $feature['title'] ?? '') !== '');
 }));
 
 if ($items === array()) {
@@ -71,8 +28,12 @@ $timeline_id = wp_unique_id('roadmap-timeline-');
         <div class="roadmap__header">
             <div class="roadmap__heading">
                 <p class="roadmap__eyebrow"><?php echo esc_html__('Вектор розвитку', 'unihum'); ?></p>
-                <h2 class="roadmap__title"><?php echo esc_html($title); ?></h2>
-                <p class="roadmap__description"><?php echo esc_html($description); ?></p>
+                <?php if ($title !== '') : ?>
+                    <h2 class="roadmap__title"><?php echo esc_html($title); ?></h2>
+                <?php endif; ?>
+                <?php if ($description !== '') : ?>
+                    <p class="roadmap__description"><?php echo esc_html($description); ?></p>
+                <?php endif; ?>
             </div>
             <p class="roadmap__counter" aria-live="polite">
                 <span data-roadmap-current>01</span><span aria-hidden="true"> / </span><span><?php echo esc_html(str_pad((string) count($items), 2, '0', STR_PAD_LEFT)); ?></span>
@@ -115,9 +76,7 @@ $timeline_id = wp_unique_id('roadmap-timeline-');
                     $item_title = (string) ($item['home_roadmap_item_title'] ?? $item['title'] ?? '');
                     $item_description = (string) ($item['home_roadmap_item_description'] ?? $item['description'] ?? '');
                     $icon_id = absint($item['home_roadmap_item_icon'] ?? 0);
-                    $pattern_index = $index % count($pattern_files);
-                    $pattern_path = get_theme_file_path('assets/images/svg/' . $pattern_files[$pattern_index]);
-                    $pattern_svg = is_readable($pattern_path) ? (string) file_get_contents($pattern_path) : '';
+                    $pattern_index = $index % 5;
                     ?>
                     <article
                         class="roadmap__panel roadmap__panel--pattern-<?php echo esc_attr((string) ($pattern_index + 1)); ?><?php echo $index % 2 === 1 ? ' roadmap__panel--reverse' : ''; ?><?php echo $index === 0 ? ' is-active' : ''; ?>"
@@ -128,10 +87,6 @@ $timeline_id = wp_unique_id('roadmap-timeline-');
                         data-roadmap-index="<?php echo esc_attr((string) $index); ?>"
                         data-roadmap-panel
                     >
-                        <div class="roadmap__panel-orbit" aria-hidden="true">
-                            <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The SVG is a local theme asset. ?>
-                            <?php echo $pattern_svg; ?>
-                        </div>
                         <div class="roadmap__panel-content">
                             <div class="roadmap__icon" aria-hidden="true">
                                 <?php

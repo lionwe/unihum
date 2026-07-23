@@ -1,6 +1,6 @@
 <?php
-$title = (string) get_field('home_why_now_title');
-$description = (string) get_field('home_why_now_description');
+$title = trim((string) get_field('home_why_now_title'));
+$description = trim((string) get_field('home_why_now_description'));
 $items = get_field('home_why_now_items');
 $fallback_icon_urls = array(
     get_template_directory_uri() . '/assets/images/svg/brain.svg',
@@ -8,14 +8,6 @@ $fallback_icon_urls = array(
     get_template_directory_uri() . '/assets/images/svg/planet.svg',
     get_template_directory_uri() . '/assets/images/svg/lotus.svg',
 );
-
-if ($title === '') {
-    $title = __('Чому саме зараз?', 'unihum');
-}
-
-if ($description === '') {
-    $description = __('Уперше в історії людство стикається з викликами, які роблять еволюцію свідомості не просто важливою, а необхідною.', 'unihum');
-}
 
 if (!is_array($items)) {
     $items = array();
@@ -36,9 +28,13 @@ if ($items === array()) {
     <div class="container">
         <div class="why-now__layout">
             <div class="why-now__heading">
-                <h2 class="why-now__title"><?php echo esc_html($title); ?></h2>
+                <?php if ($title !== '') : ?>
+                    <h2 class="why-now__title"><?php echo esc_html($title); ?></h2>
+                <?php endif; ?>
                 <span class="why-now__eyebrow" aria-hidden="true">✦</span>
-                <p class="why-now__description"><?php echo esc_html($description); ?></p>
+                <?php if ($description !== '') : ?>
+                    <p class="why-now__description"><?php echo esc_html($description); ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="why-now__items">
