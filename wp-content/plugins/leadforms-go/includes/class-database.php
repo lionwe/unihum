@@ -6,7 +6,9 @@ namespace LeadFormsGo;
 
 final class Database
 {
-	private const SCHEMA_VERSION = '1.6.0';
+	private const SCHEMA_VERSION = '1.7.0';
+	private const SITE_ORIGIN_OPTION = 'leadforms_go_site_origin';
+	private const SITE_TRANSFER_OPTION = 'leadforms_go_site_transfer';
 
 	public static function tables(): array
 	{
@@ -17,6 +19,7 @@ final class Database
 			'deliveries' => $wpdb->prefix . 'leadforms_go_deliveries',
 			'attempts' => $wpdb->prefix . 'leadforms_go_delivery_attempts',
 			'rate_limits' => $wpdb->prefix . 'leadforms_go_rate_limits',
+			'views' => $wpdb->prefix . 'leadforms_go_views',
 		];
 	}
 
@@ -24,6 +27,7 @@ final class Database
 	{
 		self::install();
 		self::migrate_legacy();
+		self::protect_site_transfer();
 	}
 
 	public static function maybe_upgrade(): void
@@ -32,7 +36,14 @@ final class Database
 			self::install();
 		}
 		if (! get_option('leadforms_go_legacy_migrated')) self::migrate_legacy();
+		self::protect_site_transfer();
 		self::grant_capabilities();
+	}
+
+	public static function site_transfer_notice(): array
+	{
+		$notice = get_option(self::SITE_TRANSFER_OPTION, []);
+		return is_array($notice) ? $notice : [];
 	}
 
 	private static function install(): void
@@ -54,6 +65,9 @@ final class Database
 			translations longtext NOT NULL,
 			routing_config longtext NOT NULL,
 			routing_version int(10) unsigned NOT NULL DEFAULT 1,
+			success_action varchar(20) NOT NULL DEFAULT 'message',
+			success_redirect_url text NOT NULL,
+			success_duration smallint(5) unsigned NOT NULL DEFAULT 4,
 			active tinyint(1) unsigned NOT NULL DEFAULT 1,
 			legacy_id bigint(20) unsigned DEFAULT NULL,
 			created_at datetime NOT NULL,
@@ -70,6 +84,17 @@ final class Database
 			locale varchar(20) NOT NULL DEFAULT 'uk_UA',
 			request_id varchar(64) DEFAULT NULL,
 			is_test tinyint(1) unsigned NOT NULL DEFAULT 0,
+			landing_page text NOT NULL,
+			document_referrer text NOT NULL,
+			utm_source varchar(255) NOT NULL DEFAULT '',
+			utm_medium varchar(255) NOT NULL DEFAULT '',
+			utm_campaign varchar(255) NOT NULL DEFAULT '',
+			utm_term varchar(255) NOT NULL DEFAULT '',
+			utm_content varchar(255) NOT NULL DEFAULT '',
+			gclid varchar(255) NOT NULL DEFAULT '',
+			fbclid varchar(255) NOT NULL DEFAULT '',
+			ttclid varchar(255) NOT NULL DEFAULT '',
+			visited_at datetime DEFAULT NULL,
 			status varchar(20) NOT NULL DEFAULT 'pending',
 			created_at datetime NOT NULL,
 			PRIMARY KEY  (id),
@@ -120,6 +145,15 @@ final class Database
 			expires_at datetime NOT NULL,
 			PRIMARY KEY  (key_hash),
 			KEY expires_at (expires_at)
+		) $collate;");
+		dbDelta("CREATE TABLE {$tables['views']} (
+			view_date date NOT NULL,
+			form_id bigint(20) unsigned NOT NULL,
+			utm_source varchar(191) NOT NULL DEFAULT '',
+			utm_campaign varchar(191) NOT NULL DEFAULT '',
+			views bigint(20) unsigned NOT NULL DEFAULT 0,
+			PRIMARY KEY  (view_date,form_id,utm_source,utm_campaign),
+			KEY form_date (form_id,view_date)
 		) $collate;");
 		self::migrate_form_translations();
 		self::grant_capabilities();
@@ -230,6 +264,34 @@ final class Database
 			}
 		}
 		update_option('leadforms_go_legacy_migrated', time(), false);
+	}
+
+	private static function protect_site_transfer(): void
+	{
+		$current = self::site_origin();
+		if ($current === '') return;
+		$previous = esc_url_raw((string) get_option(self::SITE_ORIGIN_OPTION, ''));
+		if ($previous === '') {
+			update_option(self::SITE_ORIGIN_OPTION, $current, false);
+			return;
+		}
+		if (hash_equals($previous, $current)) return;
+
+		Settings::disable_integrations();
+		$cancelled = Repositories::cancel_active_deliveries(__('Доставку скасовано після перенесення сайту. Перевірте інтеграції перед повторною відправкою.', 'leadforms-go'));
+		delete_option('leadforms_go_queue_pending');
+		update_option(self::SITE_ORIGIN_OPTION, $current, false);
+		update_option(self::SITE_TRANSFER_OPTION, [
+			'previous' => $previous,
+			'current' => $current,
+			'cancelled' => $cancelled,
+			'detected_at' => time(),
+		], false);
+	}
+
+	private static function site_origin(): string
+	{
+		return untrailingslashit(strtolower(esc_url_raw(home_url('/'))));
 	}
 
 	private static function table_exists(string $table): bool

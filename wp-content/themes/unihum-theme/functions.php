@@ -161,6 +161,43 @@ function getHomePageID()
     return $default_home_id;
 }
 
+/**
+ * Render the globally configured LeadForms Go CTA form.
+ *
+ * The option is restricted to the two shortcode tags registered by the plugin.
+ * Shortcode callbacks return trusted form markup, including form controls and
+ * data attributes that must not be stripped by a second KSES pass.
+ */
+function unihum_get_cta_form_markup(): string
+{
+    if (!function_exists('get_field')) {
+        return '';
+    }
+
+    $shortcode = trim(
+        sanitize_text_field((string) get_field('site_cta_form_shortcode', 'option'))
+    );
+
+    if (
+        $shortcode === ''
+        || !preg_match(
+            '/^\[\s*(leadforms_go_form|reintegration_form)\b[^\]]*\]\s*$/',
+            $shortcode,
+            $matches
+        )
+    ) {
+        return '';
+    }
+
+    $shortcode_tag = sanitize_key((string) ($matches[1] ?? ''));
+
+    if ($shortcode_tag === '' || !shortcode_exists($shortcode_tag)) {
+        return '';
+    }
+
+    return do_shortcode($shortcode);
+}
+
 // ============================================
 // GUTENBERG DISABLE (NUCLEAR OPTION)
 // ============================================

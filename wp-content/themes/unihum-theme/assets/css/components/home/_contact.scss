@@ -1,0 +1,493 @@
+@use "../../utils/mixins" as *;
+@use "../../base/fonts" as *;
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(convert-to-rem(72px), 8vw, convert-to-rem(124px));
+  background:
+    radial-gradient(circle at 16% 8%, var(--color-primary-20), transparent 28%),
+    radial-gradient(circle at 89% 72%, var(--color-secondary-20), transparent 30%),
+    linear-gradient(135deg, var(--color-white), var(--color-neutral-50));
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+    width: clamp(convert-to-rem(300px), 32vw, convert-to-rem(520px));
+    aspect-ratio: 1;
+    border: convert-to-rem(1px) solid var(--color-primary-20);
+    border-radius: 50%;
+    background:
+      repeating-conic-gradient(
+        from 9deg,
+        var(--color-primary-20) 0 0.3deg,
+        transparent 0.3deg 30deg
+      ),
+      radial-gradient(
+        circle,
+        transparent 44%,
+        var(--color-primary-20) 44.2%,
+        transparent 44.7%,
+        transparent 67%,
+        var(--color-primary-20) 67.2%,
+        transparent 67.7%
+      );
+    content: "";
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  &::before {
+    bottom: convert-to-rem(-300px);
+    left: convert-to-rem(-330px);
+  }
+
+  &::after {
+    top: 38%;
+    right: convert-to-rem(-390px);
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.98fr) minmax(convert-to-rem(500px), 1.02fr);
+    gap: clamp(convert-to-rem(54px), 7vw, convert-to-rem(112px));
+    align-items: center;
+  }
+
+  &--copy-only &__layout,
+  &--form-only &__layout {
+    grid-template-columns: minmax(0, convert-to-rem(760px));
+    justify-content: center;
+  }
+
+  &__content {
+    max-width: convert-to-rem(620px);
+  }
+
+  &__ornament {
+    display: flex;
+    align-items: center;
+    gap: convert-to-rem(16px);
+    width: convert-to-rem(270px);
+    margin-block: clamp(convert-to-rem(24px), 3vw, convert-to-rem(34px));
+    color: var(--color-primary-dark);
+
+    &::after {
+      width: 100%;
+      height: convert-to-rem(1px);
+      flex: 1;
+      order: -1;
+      background: linear-gradient(90deg, transparent, currentcolor);
+      content: "";
+    }
+
+    &::before {
+      display: block;
+      flex: 0 0 auto;
+      content: "✦";
+      @include typography($font-secondary, $fw-regular, 36px, 1);
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      height: convert-to-rem(1px);
+      flex: 1;
+      background: linear-gradient(90deg, currentcolor, transparent);
+    }
+  }
+
+  &__title {
+    max-width: convert-to-rem(700px);
+    margin: 0;
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (46px, 72px), (48px, 68px), -1px);
+  }
+
+  &__description {
+    max-width: convert-to-rem(650px);
+    margin-top: 0;
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (16px, 18px), (25px, 28px));
+
+    p {
+      margin: 0;
+    }
+
+    p + p {
+      margin-top: convert-to-rem(14px);
+    }
+  }
+
+  &__items {
+    display: grid;
+    gap: convert-to-rem(18px);
+    margin-top: clamp(convert-to-rem(34px), 5vw, convert-to-rem(50px));
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: convert-to-rem(82px) minmax(0, 1fr);
+    gap: clamp(convert-to-rem(20px), 3vw, convert-to-rem(30px));
+    align-items: center;
+  }
+
+  &__item-icon {
+    display: grid;
+    width: convert-to-rem(82px);
+    aspect-ratio: 1;
+    place-items: center;
+    border: convert-to-rem(1px) solid color-mix(in srgb, var(--color-primary-dark) 42%, transparent);
+    border-radius: 50%;
+    background: var(--color-white-70);
+    color: var(--color-primary-dark);
+  }
+
+  &__item-icon-image {
+    display: block;
+    width: 52%;
+    height: 52%;
+    object-fit: contain;
+  }
+
+  &__item-content {
+    padding: convert-to-rem(4px) 0 convert-to-rem(4px) clamp(convert-to-rem(18px), 2vw, convert-to-rem(28px));
+    border-left: convert-to-rem(1px) solid var(--color-primary-20);
+  }
+
+  &__item-title {
+    margin: 0 0 convert-to-rem(4px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (20px, 24px), (25px, 29px));
+  }
+
+  &__item-description {
+    margin: 0;
+    color: var(--color-neutral-600);
+    @include typography($font-primary, $fw-regular, (14px, 16px), (21px, 24px));
+  }
+
+  &__form-card {
+    position: relative;
+    padding: clamp(convert-to-rem(34px), 4vw, convert-to-rem(60px));
+    border: convert-to-rem(1px) solid color-mix(in srgb, var(--color-primary-dark) 34%, transparent);
+    border-radius: clamp(convert-to-rem(22px), 2vw, convert-to-rem(30px));
+    background: color-mix(in srgb, var(--color-white) 88%, transparent);
+    box-shadow: 0 convert-to-rem(24px) convert-to-rem(70px) var(--color-secondary-20);
+    backdrop-filter: blur(convert-to-rem(14px));
+  }
+
+  &__form-ornament {
+    position: absolute;
+    top: clamp(convert-to-rem(28px), 3vw, convert-to-rem(46px));
+    right: clamp(convert-to-rem(28px), 3vw, convert-to-rem(50px));
+    color: var(--color-primary-dark);
+    @include typography($font-secondary, $fw-regular, 34px, 1);
+  }
+
+  &__form-title {
+    margin: 0 0 clamp(convert-to-rem(24px), 3vw, convert-to-rem(34px));
+    padding-right: convert-to-rem(54px);
+    color: var(--color-neutral-950);
+    @include typography($font-secondary, $fw-semibold, (28px, 34px), (34px, 40px));
+  }
+
+  &__form {
+    --contact-field-icon: url("../images/svg/contact-user.svg");
+
+    .leadforms-go-form,
+    form {
+      width: 100%;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: convert-to-rem(16px);
+    }
+
+    .leadforms-go-field {
+      position: relative;
+      margin: 0;
+    }
+
+    .leadforms-go-field > label:not(.leadforms-go-checkbox) {
+      position: relative;
+      display: block;
+
+      &::before {
+        position: absolute;
+        z-index: 1;
+        top: convert-to-rem(20px);
+        left: convert-to-rem(20px);
+        width: convert-to-rem(22px);
+        height: convert-to-rem(22px);
+        background-color: var(--color-neutral-600);
+        content: "";
+        pointer-events: none;
+        // stylelint-disable-next-line property-no-vendor-prefix
+        -webkit-mask: var(--contact-field-icon) center / contain no-repeat;
+        mask: var(--contact-field-icon) center / contain no-repeat;
+      }
+
+      &:has(input[type="email"]) {
+        --contact-field-icon: url("../images/svg/contact-email.svg");
+      }
+
+      &:has(select) {
+        --contact-field-icon: url("../images/svg/contact-select.svg");
+      }
+
+      &:has(textarea) {
+        --contact-field-icon: url("../images/svg/contact-message.svg");
+      }
+    }
+
+    input:not([type="checkbox"], [type="radio"], [type="hidden"]),
+    textarea,
+    select {
+      min-height: convert-to-rem(64px);
+      padding: convert-to-rem(16px) convert-to-rem(48px) convert-to-rem(16px) convert-to-rem(58px);
+      border: convert-to-rem(1px) solid color-mix(in srgb, var(--color-primary-dark) 24%, transparent);
+      border-radius: convert-to-rem(10px);
+      outline: none;
+      background-color: color-mix(in srgb, var(--color-white) 72%, transparent);
+      color: var(--color-neutral-950);
+      box-shadow: none;
+      transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+      @include typography($font-primary, $fw-regular, (15px, 17px), (22px, 24px));
+
+      &::placeholder {
+        color: color-mix(in srgb, var(--color-neutral-600) 76%, transparent);
+        opacity: 1;
+      }
+
+      &:hover {
+        border-color: color-mix(in srgb, var(--color-primary-dark) 48%, transparent);
+      }
+
+      &:focus-visible {
+        border-color: var(--color-primary-dark);
+        background-color: var(--color-white);
+        box-shadow: 0 0 0 convert-to-rem(3px) var(--color-primary-20);
+      }
+
+      &[aria-invalid="true"] {
+        border-color: var(--color-red-600);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.62;
+      }
+    }
+
+    textarea {
+      min-height: convert-to-rem(160px);
+      resize: vertical;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("../images/svg/contact-chevron.svg");
+      background-repeat: no-repeat;
+      background-position: right convert-to-rem(20px) center;
+      background-size: convert-to-rem(18px);
+    }
+
+    .leadforms-go-checkbox {
+      display: flex;
+      gap: convert-to-rem(10px);
+      align-items: flex-start;
+      color: var(--color-neutral-600);
+      @include typography($font-primary, $fw-regular, 14px, 20px);
+
+      input {
+        width: convert-to-rem(18px);
+        height: convert-to-rem(18px);
+        margin-top: convert-to-rem(1px);
+        accent-color: var(--color-primary-dark);
+      }
+    }
+
+    .btn[type="submit"] {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: convert-to-rem(18px);
+      width: 100%;
+      min-height: convert-to-rem(64px);
+      margin-top: convert-to-rem(2px);
+      border: 0;
+      border-radius: convert-to-rem(10px);
+      background: linear-gradient(110deg, var(--color-primary-dark), var(--color-primary));
+      color: var(--color-white);
+      box-shadow: 0 convert-to-rem(14px) convert-to-rem(28px) var(--color-primary-20);
+      @include typography($font-primary, $fw-semibold, (16px, 18px), 1.2);
+
+      &:not(:has(.leadforms-go-button__icon))::after {
+        content: "→";
+        @include typography($font-primary, $fw-regular, 24px, 1);
+      }
+
+      &:hover {
+        filter: brightness(1.04);
+      }
+
+      &:focus-visible {
+        outline: convert-to-rem(3px) solid var(--color-primary-light);
+        outline-offset: convert-to-rem(3px);
+      }
+
+      &:disabled {
+        cursor: wait;
+        filter: saturate(0.55);
+        opacity: 0.72;
+      }
+    }
+
+    .form-error,
+    .leadforms-go-form__status {
+      margin-top: convert-to-rem(6px);
+      color: var(--color-red-600);
+      @include typography($font-primary, $fw-regular, 13px, 18px);
+    }
+
+    .leadforms-go-form__field-error,
+    .reintegration-form__field-error {
+      position: absolute;
+      z-index: 5;
+      bottom: calc(100% + convert-to-rem(10px));
+      left: convert-to-rem(14px);
+      width: max-content;
+      max-width: calc(100% - convert-to-rem(28px));
+      padding: convert-to-rem(8px) convert-to-rem(12px);
+      border: convert-to-rem(1px) solid color-mix(in srgb, var(--color-red-600) 72%, var(--color-white));
+      border-radius: convert-to-rem(6px);
+      background-color: var(--color-red-600);
+      box-shadow: 0 convert-to-rem(8px) convert-to-rem(20px) color-mix(in srgb, var(--color-black) 20%, transparent);
+      color: var(--color-white);
+      pointer-events: none;
+      @include typography($font-primary, $fw-medium, (12px, 13px), (16px, 18px));
+
+      &::after {
+        position: absolute;
+        top: 100%;
+        left: convert-to-rem(18px);
+        width: 0;
+        height: 0;
+        border-width: convert-to-rem(7px) convert-to-rem(6px) 0;
+        border-style: solid;
+        border-color: var(--color-red-600) transparent transparent;
+        content: "";
+      }
+    }
+
+    .leadforms-go-form__status:not(:empty) {
+      padding: convert-to-rem(12px) convert-to-rem(14px);
+      border-radius: convert-to-rem(8px);
+      background-color: color-mix(in srgb, var(--color-primary-light) 52%, var(--color-white));
+      color: var(--color-neutral-950);
+    }
+  }
+
+  &__privacy {
+    position: relative;
+    min-height: convert-to-rem(28px);
+    margin: clamp(convert-to-rem(20px), 3vw, convert-to-rem(28px)) 0 0;
+    padding: convert-to-rem(18px) 0 0 convert-to-rem(38px);
+    border-top: convert-to-rem(1px) solid var(--color-primary-20);
+    color: color-mix(in srgb, var(--color-neutral-600) 78%, transparent);
+    @include typography($font-primary, $fw-regular, (12px, 14px), (18px, 21px));
+
+    &::before {
+      position: absolute;
+      top: convert-to-rem(18px);
+      left: 0;
+      width: convert-to-rem(24px);
+      height: convert-to-rem(24px);
+      background-color: var(--color-primary-dark);
+      content: "";
+      // stylelint-disable-next-line property-no-vendor-prefix
+      -webkit-mask: url("../images/svg/contact-privacy.svg") center / contain no-repeat;
+      mask: url("../images/svg/contact-privacy.svg") center / contain no-repeat;
+    }
+  }
+
+  @include mobile {
+    padding-block: convert-to-rem(64px);
+
+    &__layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: convert-to-rem(50px);
+    }
+
+    &__content {
+      max-width: none;
+    }
+
+    &__form-card {
+      width: 100%;
+      max-width: convert-to-rem(720px);
+      margin-inline: auto;
+    }
+  }
+
+  @media screen and (max-width: convert-to-rem(575px)) {
+    padding-block: convert-to-rem(48px);
+
+    &__ornament {
+      width: convert-to-rem(220px);
+      margin-block: convert-to-rem(24px);
+    }
+
+    &__item {
+      grid-template-columns: convert-to-rem(64px) minmax(0, 1fr);
+      gap: convert-to-rem(14px);
+    }
+
+    &__item-icon {
+      width: convert-to-rem(64px);
+    }
+
+    &__item-content {
+      padding-left: convert-to-rem(14px);
+    }
+
+    &__form-card {
+      padding: convert-to-rem(26px) convert-to-rem(20px);
+      border-radius: convert-to-rem(20px);
+    }
+
+    &__form-ornament {
+      top: convert-to-rem(24px);
+      right: convert-to-rem(22px);
+    }
+
+    &__form {
+      .leadforms-go-field > label:not(.leadforms-go-checkbox)::before {
+        top: convert-to-rem(18px);
+        left: convert-to-rem(16px);
+        width: convert-to-rem(20px);
+        height: convert-to-rem(20px);
+      }
+
+      input:not([type="checkbox"], [type="radio"], [type="hidden"]),
+      textarea,
+      select {
+        min-height: convert-to-rem(58px);
+        padding: convert-to-rem(14px) convert-to-rem(42px) convert-to-rem(14px) convert-to-rem(48px);
+      }
+
+      textarea {
+        min-height: convert-to-rem(140px);
+      }
+
+      .btn[type="submit"] {
+        min-height: convert-to-rem(58px);
+      }
+    }
+  }
+}

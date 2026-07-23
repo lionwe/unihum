@@ -32,9 +32,6 @@ $cta_get_field = static function (string $suffix) use (
 };
 
 $cta_content = wp_kses_post((string) $cta_get_field('content'));
-$cta_form_shortcode = sanitize_text_field(
-    (string) $cta_get_field('form_shortcode')
-);
 $cta_background_desktop_id = absint($cta_get_field('background_desktop'));
 $cta_background_mobile_id = absint($cta_get_field('background_mobile'));
 $cta_allowed_mime_types = array('image/webp', 'image/avif');
@@ -59,15 +56,9 @@ $cta_background_id = $cta_background_desktop_id ?: $cta_background_mobile_id;
 $cta_background_mobile_srcset = $cta_background_mobile_id > 0
     ? wp_get_attachment_image_srcset($cta_background_mobile_id, 'full')
     : '';
-$cta_form = '';
-
-if ($cta_form_shortcode !== '' && shortcode_exists('reintegration_form')) {
-    $cta_form = do_shortcode($cta_form_shortcode);
-}
-
-$cta_form_allowed_html = defined('allowed_tags') && is_array(allowed_tags)
-    ? allowed_tags
-    : wp_kses_allowed_html('post');
+$cta_form = function_exists('unihum_get_cta_form_markup')
+    ? unihum_get_cta_form_markup()
+    : '';
 ?>
 
 <section class="<?php echo esc_attr($cta_section_class); ?>" id="<?php echo esc_attr($cta_section_id); ?>">
@@ -106,7 +97,7 @@ $cta_form_allowed_html = defined('allowed_tags') && is_array(allowed_tags)
 
                 <?php if ($cta_form !== '') : ?>
                     <div class="more-info__form section-form">
-                        <?php echo wp_kses($cta_form, $cta_form_allowed_html); ?>
+                        <?php echo $cta_form; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     </div>
                 <?php endif; ?>
             </div>
