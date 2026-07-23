@@ -12,17 +12,6 @@
   padding-block: clamp(convert-to-rem(64px), 8vw, convert-to-rem(120px));
   background-color: var(--color-neutral-50);
 
-  &::before {
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background-image: radial-gradient(var(--color-neutral-600) convert-to-rem(1px), transparent convert-to-rem(1px));
-    background-size: convert-to-rem(22px) convert-to-rem(22px);
-    opacity: 0.12;
-    content: "";
-    mask-image: linear-gradient(to right, transparent, var(--color-black) 22%, var(--color-black) 78%, transparent);
-  }
-
   &__header {
     display: flex;
     justify-content: space-between;
@@ -109,6 +98,13 @@
     min-height: convert-to-rem(44px);
     margin-top: clamp(convert-to-rem(40px), 4vw, convert-to-rem(56px));
     margin-bottom: clamp(convert-to-rem(20px), 3vw, convert-to-rem(32px));
+    transition: opacity 120ms ease-out, visibility 0s linear;
+
+    .roadmap.is-hint-hidden & {
+      visibility: hidden;
+      opacity: 0;
+      transition-delay: 0s, 120ms;
+    }
   }
 
   &__hint {
@@ -337,8 +333,6 @@
   }
 
   @media screen and (min-width: convert-to-rem(993px)) {
-    padding-bottom: 0;
-
     &__header {
       position: sticky;
       z-index: 6;
@@ -362,14 +356,12 @@
     }
 
     &__controls {
-      position: sticky;
-      z-index: 6;
-      top: convert-to-rem(370px);
       padding-block: convert-to-rem(10px) convert-to-rem(18px);
     }
 
     &__panels {
       position: sticky;
+      z-index: 7;
       top: calc(50vh - var(--roadmap-panel-offset) + #{convert-to-rem(170px)});
       min-height: var(--roadmap-panel-height);
     }
@@ -469,6 +461,7 @@
   @media (prefers-reduced-motion: reduce) {
     &__step,
     &__step-index,
+    &__controls,
     &__link,
     &__panel {
       transition: none;

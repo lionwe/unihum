@@ -3,12 +3,13 @@ document.querySelectorAll("[data-roadmap]").forEach((roadmap) => {
   const panels = Array.from(roadmap.querySelectorAll("[data-roadmap-panel]"));
   const current = roadmap.querySelector("[data-roadmap-current]");
   const timeline = roadmap.querySelector(".roadmap__timeline");
+  const navigation = roadmap.querySelector(".roadmap__navigation");
   const stage = roadmap.querySelector("[data-roadmap-stage]");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let activeIndex = 0;
   let scrollFrame = null;
 
-  if (tabs.length < 2 || tabs.length !== panels.length || !timeline || !stage) {
+  if (tabs.length < 2 || tabs.length !== panels.length || !timeline || !navigation || !stage) {
     return;
   }
 
@@ -77,13 +78,19 @@ document.querySelectorAll("[data-roadmap]").forEach((roadmap) => {
     scrollFrame = null;
 
     if (!isDesktop()) {
+      roadmap.classList.remove("is-hint-hidden");
       return;
     }
 
     const rect = timeline.getBoundingClientRect();
+    const navigationRect = navigation.getBoundingClientRect();
+    const navigationStickyTop = Number.parseFloat(window.getComputedStyle(navigation).top);
     const distance = Math.max(timeline.offsetHeight - window.innerHeight, 1);
     const progress = Math.min(Math.max(-rect.top / distance, 0), 1);
     const nextIndex = Math.round(progress * (tabs.length - 1));
+    const isNavigationPinned = Number.isFinite(navigationStickyTop) && navigationRect.top <= navigationStickyTop + 1;
+
+    roadmap.classList.toggle("is-hint-hidden", progress > 0 || isNavigationPinned);
 
     if (nextIndex !== activeIndex) {
       activateTab(nextIndex);
