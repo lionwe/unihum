@@ -11,6 +11,7 @@ Template Name: Home
     <?php get_template_part('sections/home/why-now'); ?>
     <?php get_template_part('sections/home/created'); ?>
     <?php get_template_part('sections/home/roadmap'); ?>
+    <?php get_template_part('sections/home/author'); ?>
 
 </main>
 

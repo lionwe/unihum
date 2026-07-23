@@ -22,6 +22,7 @@
 
 main {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--_section-gap);
   grid-auto-rows: max-content;
 }
